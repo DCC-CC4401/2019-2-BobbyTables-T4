@@ -1,0 +1,595 @@
+{% extends 'base.html' %}
+{% block body %}
+    <!--EL RESTO-->
+    <div class="container-fluid text-center p-4 main">
+        <div class="row p-2 mx-2 rounded shadow table-success">
+            <div class="col-9 text-left">
+                <h2 class="pt-2">Horario de actividades</h2>
+            </div>
+            <button class="showButton col-3 h-100 showclock btn btn-primary h3 my-1" id="buttonclock">Iniciar Actividad
+                en tiempo real
+            </button>
+            <!--RELOJ-->
+            <div class="hiddenn col-2">
+                <div class="card h-100 bg-primary text-white h2 pt-2 " id="chronotime">
+                    0:00:00
+                </div>
+            </div>
+            <!--botones del reloj-->
+            <div class="hiddenn col-1" id="chronotime2">
+                <div class="row">
+                    <button class="btn btn-sm btn-block btn-success"> Iniciar</button>
+                </div>
+                <div class="row">
+                    <button class="hideButton btn btn-sm btn-block btn-danger"> Detener</button>
+                </div>
+            </div>
+        </div>
+        <div class="row pt-4">
+            <div class="col-2">
+                <button type="button" class="btn btn-sm btn-success"> << Mes</button>
+                <button type="button" class="btn btn-sm btn-success font-weight-bold"> << Semana</button>
+            </div>
+            <div class="col-8 h3">
+                Semana del lunes 09 de septiembre, 2019
+            </div>
+            <div class="col-2">
+                <button type="button" class="btn btn-sm btn-success font-weight-bold"> Semana >></button>
+                <button type="button" class="btn btn-sm btn-success"> Mes >></button>
+            </div>
+        </div>
+        <!--HORARIO-->
+        <div class="row ml-1 scroll-horario shadow">
+            <table class="table table-bordered table-sm text-center ">
+                <thead class="thead-dark table-head-sticky">
+                <tr>
+                    <th>Hora<br></th>
+                    <th>Lunes</th>
+                    <th>Martes</th>
+                    <th>Miércoles</th>
+                    <th>Jueves</th>
+                    <th>Viernes</th>
+                    <th>Sábado</th>
+                    <th>Domingo</th>
+                </tr>
+                </thead>
+                <tr>
+                    <td>00:00</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class="table-primary">Dormir</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>01:00</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class="table-primary">Dormir</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>02:00</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class="table-primary">Dormir</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>03:00</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class="table-primary">Dormir</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>04:00</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class="table-primary">Dormir</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>05:00</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class="table-primary">Dormir</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>06:00</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class="table-primary">Dormir</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>07:00</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>08:00<br></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>09:00</td>
+                    <td></td>
+                    <td class="table-info">Estudiar</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>10:00</td>
+                    <td></td>
+                    <td class="table-info">Estudiar</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class="table-success">Reunión familiar</td>
+                </tr>
+                <tr>
+                    <td>11:00</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>12:00</td>
+                    <td></td>
+                    <td></td>
+                    <td class="table-danger ">
+                        <button class="btn btn-sm btn-block" data-toggle="modal" data-target="#Activity"> Ida
+                            Universidad
+                        </button>
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>13:00</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class="table-primary">Jugar PC</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>14:00</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class="table-primary">Jugar PC</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>15:00</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>16:00</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>17:00</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class="table-warning">Ir al cine</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>18:00</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class="table-warning">Ir al cine</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>19:00</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>20:00</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>21:00</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>22:00</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>23:00</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </table>
+            <!--MODAL FICHA-->
+            <div class="modal fade" id="Activity" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+                 aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header text-center">
+                            <h5 class="modal-title col-10 text-center" id="activitymodal">Ficha de Actividad
+                            </h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <form>
+                                            <div class="row">
+                                                <label for="nombractividad" class="col-4 col-form-label">Nombre de la
+                                                    actividad</label>
+                                                <div class="col-8">
+                                                    <input id="nombractividad" name="nombreactividad"
+                                                           value="Ida Universidad" class="form-control"
+                                                           required="required" type="text" readonly="readonly">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="descripcionf"
+                                                       class="col-4 col-form-label">Descripción</label>
+                                                <div class="col-8">
+                                                    <textarea id="descripcionf" name="descripcion" cols="40" rows="4"
+                                                              class="form-control" readonly="readonly">Viaje con destino a la Universidad para entrar a todas las clases.</textarea>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="select" class="col-4 col-form-label">Categoría</label>
+                                                <div class="col-8">
+                                                    <input type="text" name="select" value="Viaje" class="form-control"
+                                                           readonly="readonly">
+
+
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="lastname" class="col-4 col-form-label">Fecha</label>
+                                                <div class="col-8">
+                                                    <input type="text" name="lastname" value="09/10/2019"
+                                                           class="form-control" type="date" readonly="readonly">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="inicio" class="col-4 col-form-label">Hora inicio</label>
+                                                <div class="col-8">
+                                                    <input type="text" name="inicio" value="12:00 PM"
+                                                           class="form-control" required="required" readonly="readonly">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="inicio" class="col-4 col-form-label">Duración</label>
+
+                                                <div class="col-4">
+                                                    <input type="number" min="0" pattern="^[0-9]" step="1"
+                                                           name="numberHours" class="form-control" required="required"
+                                                           value="01" readonly="readonly"> Horas
+                                                </div>
+                                                <div class="col-4">
+                                                    <input type="number" min="0" pattern="^[0-9]" step="1"
+                                                           name="numberHours" class="form-control" required="required"
+                                                           value="00" readonly="readonly"> Minutos
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--AGREGAR ACTIVIDAD-->
+        <div class="row">
+            <div class="col-3 pl-4">
+                <button class="btn btn-success btn-block btn-sm" data-toggle="modal" data-target="#addActivity">Agregar
+                    Actividad
+                </button>
+            </div>
+            <!--MODAL PARA AGREGAR ACTIVIDAD-->
+            <div class="modal fade" id="addActivity" tabindex="-1" role="dialog"
+                 aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title col-10 text-center" id="exampleModalLongTitle">Agregar Actividad</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <form>
+                                            <div class="form-group row">
+                                                <label for="nombreactividad" class="col-4 col-form-label">Nombre de la
+                                                    actividad</label>
+                                                <div class="col-8">
+                                                    <input id="nombreactividad" name="nombreactividad"
+                                                           placeholder="Nombre de la Actividad" class="form-control"
+                                                           required="required" type="text">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="descripcion"
+                                                       class="col-4 col-form-label">Descripción</label>
+                                                <div class="col-8">
+                                                    <textarea id="descripcion" name="descripcion"
+                                                              placeholder="Descripción" cols="40" rows="4"
+                                                              class="form-control"></textarea></div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="select" class="col-4 col-form-label">Categoría</label>
+                                                <div class="col-8">
+                                                    <select id="select" name="select" class="custom-select">
+                                                        <option value="dormir">Dormir</option>
+                                                        <option value="estudiar">Estudiar</option>
+                                                        <option value="irclase">Ir a clases</option>
+                                                        <option value="viajar">Viajar</option>
+                                                        <option value="otro">Otro</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="lastname" class="col-4 col-form-label">Fecha</label>
+                                                <div class="col-8">
+                                                    <input id="lastname" name="lastname" placeholder="Fecha"
+                                                           class="form-control" type="date">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="inicio" class="col-4 col-form-label">Hora inicio</label>
+                                                <div class="col-8">
+                                                    <input id="inicio" name="inicio" placeholder="Hora de inicio"
+                                                           class="form-control" required="required" type="time">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="inicio" class="col-4 col-form-label">Duración</label>
+                                                <div class="col-4">
+                                                    <input type="number" min="0" pattern="^[0-9]" step="1"
+                                                           name="numberHours" class="form-control" required="required"
+                                                           placeholder="horas">
+                                                </div>
+                                                <div class="col-4">
+                                                    <input type="number" min="0" pattern="^[0-9]" step="1"
+                                                           name="numberHours" class="form-control" required="required"
+                                                           placeholder="minutos">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <div class="offset-7">
+                                                    <button name="submit" type="submit" class="btn btn-primary">Crear
+                                                        Actividad
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6"></div>
+            <!--FILTROS-->
+            <div class="col-3">
+                <div class="dropdown show">
+                    <a class="btn btn-success btn-sm btn-block dropdown-toggle dropdown-toggle-split mb-3 shadow"
+                       href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
+                       aria-expanded="false">
+                        Filtros por categoría
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right px-4 py-3" aria-labelledby="dropdownMenuLink">
+                        <div class="form-check px-4">
+                            <input type="checkbox" class="form-check-input" id="Check1">
+                            <label class="form-check-label" for="Check1">Categoría 1</label>
+                        </div>
+                        <div class="form-check px-4">
+                            <input type="checkbox" class="form-check-input" id="Check2">
+                            <label class="form-check-label" for="Check2">Categoría 2</label>
+                        </div>
+                        <div class="form-check px-4">
+                            <input type="checkbox" class="form-check-input" id="Check3">
+                            <label class="form-check-label" for="Check3">Categoría 3</label>
+                        </div>
+                        <div class="form-check px-4">
+                            <input type="checkbox" class="form-check-input" id="Check4">
+                            <label class="form-check-label" for="Check4">Categoría 4</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--DATOS SEMANALES Y DE AMIGOS-->
+        <div class="row">
+            <div class="col">
+                <div>
+                    <p class="h5 text-dark">Datos semanales</p>
+                </div>
+                <!--SEMANALES-->
+                <table class="table table-bordered table-sm shadow">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Categoría</th>
+                        <th scope="col">Promedio</th>
+                        <th scope="col">Suma</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr class="table-primary">
+                        <td>Dormir</td>
+                        <td>8 hrs.</td>
+                        <td>43 hrs.</td>
+                    </tr>
+                    <tr class="table-success">
+                        <td>Dormir</td>
+                        <td>8 hrs.</td>
+                        <td>43 hrs.</td>
+                    </tr>
+                    <tr class="table-danger">
+                        <td>Dormir</td>
+                        <td>8 hrs.</td>
+                        <td>43 hrs.</td>
+                    </tr>
+                    <tr class="table-warning">
+                        <td>Dormir</td>
+                        <td>8 hrs.</td>
+                        <td>43 hrs.</td>
+                    </tr>
+                    <tr class="table-info">
+                        <td>Dormir</td>
+                        <td>8 hrs.</td>
+                        <td>43 hrs.</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col">
+                <div>
+                    <p class="h5 text-dark">Datos de amigos</p>
+                </div>
+                <!--AMIGOS-->
+                <table class="table table-bordered table-sm shadow">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th class="align-middle" scope="col">Promedio</th>
+                        <th class="align-middle" scope="col">Suma</th>
+                        <th scope="col">Desviación Estándar</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr class="table-primary">
+                        <td>8 hrs.</td>
+                        <td>43 hrs.</td>
+                        <td>1.0</td>
+                    </tr>
+                    <tr class="table-success">
+                        <td>8 hrs.</td>
+                        <td>43 hrs.</td>
+                        <td>1.0</td>
+                    </tr>
+                    <tr class="table-danger">
+                        <td>8 hrs.</td>
+                        <td>43 hrs.</td>
+                        <td>1.0</td>
+                    </tr>
+                    <tr class="table-warning">
+                        <td>8 hrs.</td>
+                        <td>43 hrs.</td>
+                        <td>1.0</td>
+                    </tr>
+                    <tr class="table-info">
+                        <td>8 hrs.</td>
+                        <td>43 hrs.</td>
+                        <td>1.0</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+

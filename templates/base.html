@@ -1,0 +1,86 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Página de Inicio</title>
+    <!-- BOOTSTRAP CSS, DO NOT DELETE -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/custom.css'%}">
+    <script src="{% static 'js/clock.js'%}"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
+    <script type="text/javascript">
+        $(function chronotimeclock() {
+            $('.showButton').click(function () {
+                $('.hiddenn').show();
+                $('.showclock').hide();
+            });
+            $('.hideButton').click(function () {
+                $('.hiddenn').hide();
+                $('.showclock').show();
+            });
+        });
+    </script>
+</head>
+
+<body>
+
+<!-- BOOTSTRAP JS, DO NOT DELETE -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+
+<div class="wrapper">
+    <!--SIDEBAR-->
+    <nav id="sidebar">
+        <div class="sidebar-header text-center py-5">
+            <h1>LOGO</h1>
+        </div>
+        <div class="text-center py-3">
+            <img src="{% static 'img/turing.jpg' %}" class="avatar px-2 py-2">
+            <p class="h6">Bienvenido, <br> Nombre de usuario</p>
+        </div>
+        <ul class="list-unstyled components text-left">
+            <li>
+                <a href="{% url 'landingPage' %}">Inicio</a>
+            </li>
+            <li>
+                <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Perfil</a>
+                <ul class="collapse list-unstyled text-left" id="pageSubmenu">
+                    <li>
+                        <a href="{% url 'profile' %}">Mi Perfil</a>
+                    </li>
+                    <li>
+                        <a href="#">Seguridad</a>
+                    </li>
+                    <li>
+                        <a href="#">Amigos</a>
+                    </li>
+                    <li>
+                        <a href="#">Mis Actividades</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">Otra cosa</a>
+            </li>
+        </ul>
+
+        <ul class="list-unstyled text-center py-4">
+            <button type="button" class="btn btn-danger">Cerrar Sesión</button>
+        </ul>
+    </nav>
+
+    {% block body %}
+    {% endblock %}
+
+</div>
+</body>
+</html>
