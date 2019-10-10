@@ -55,15 +55,18 @@ class IActividad(models.Model):
 class ActividadTipo(IActividad):
     persona = models.ForeignKey(PersonaNatural, models.SET_NULL, null=True, blank=False)
 
+
 class AbsActividad(IActividad):
     fechaYHora = models.DateTimeField(default='Sin fecha')
     duracion = models.IntegerField(default='Sin duracion')
+
     persona = models.ForeignKey(PersonaNatural, models.SET_NULL, null=True, blank=True)
 
     def create_absActividad(self, fechaYHora, duracion):
         actividad = IActividad(fechaYHora=fechaYHora, duracion=duracion)
         actividad.save()
         return actividad
+
 
 class ActividadTiempoReal(AbsActividad):
     pass
