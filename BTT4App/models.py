@@ -46,7 +46,6 @@ class PersonaNatural(models.Model):
         return self.user.password
 
 
-
 class Administrador(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
 
@@ -75,7 +74,7 @@ class IActividad(models.Model):
     descripcion = models.CharField(max_length=100, blank=False)
     categoria = models.CharField(max_length=100, blank=False)
 
-    def create_iActividad(self, nombre, descripcion, categoria):
+    def create_i_actividad(self, nombre, descripcion, categoria):
         actividad = IActividad(nombre=nombre, descripcion=descripcion, categoria=categoria)
         actividad.save()
 
@@ -92,18 +91,18 @@ class IActividad(models.Model):
 
 
 class ActividadTipo(IActividad):
-    fechaYHora = models.DateTimeField(default='Sin fecha', blank=True)
+    fecha_y_hora = models.DateTimeField(default='Sin fecha', blank=True)
     duracion = models.IntegerField(default='Sin duracion', blank=True)
     persona = models.ForeignKey(PersonaNatural, models.SET_NULL, null=True, blank=True)
 
-    def create_ActividadTipo(self, nombre, descripcion, categoria):
-        actividad_tipo = super(nombre, descripcion, categoria)
+    def create_actividad_tipo(self, nombre, descripcion, categoria):
+        actividad_tipo = super().create_i_actividad(nombre, descripcion, categoria)
         actividad_tipo.save()
 
         return actividad_tipo
 
-    def set_fecha_y_hora(self, fechaYHora):
-        self.fechaYHora = fechaYHora
+    def set_fecha_y_hora(self, fecha_y_hora):
+        self.fecha_y_hora = fecha_y_hora
 
     def set_duracion(self, duracion):
         self.duracion = duracion
@@ -111,8 +110,8 @@ class ActividadTipo(IActividad):
     def set_persona(self, persona):
         self.persona = persona
 
-    def get_fechaYHora(self):
-        return self.fechaYHora
+    def get_fecha_y_hora(self):
+        return self.fecha_y_hora
 
     def get_duracion(self):
         return self.duracion
@@ -122,18 +121,19 @@ class ActividadTipo(IActividad):
 
 
 class AbsActividad(IActividad):
-    fechaYHora = models.DateTimeField(default='Sin fecha', blank=False)
+    fecha_y_hora = models.DateTimeField(default='Sin fecha', blank=False)
     persona = models.ForeignKey(PersonaNatural, models.SET_NULL, null=True, blank=False)
 
-    def create_absActividad(self, nombre, descripcion, categoria, fechaYHora, persona):
-        abs_actividad = IActividad(fechaYHora=fechaYHora, persona=persona)
-        super(nombre, descripcion, categoria)
+    def create_abs_actividad(self, nombre, descripcion, categoria, fecha_y_hora, persona):
+        abs_actividad = super().create_i_actividad(nombre, descripcion, categoria)
+        abs_actividad.fecha_y_hora = fecha_y_hora
+        abs_actividad.persona = persona
         abs_actividad.save()
 
         return abs_actividad
 
-    def get_fechaYHora(self):
-        return self.fechaYHora
+    def get_fecha_y_hora(self):
+        return self.fecha_y_hora
 
     def get_persona(self):
         return self.persona
@@ -142,8 +142,8 @@ class AbsActividad(IActividad):
 class ActividadTiempoReal(AbsActividad):
     duracion = models.IntegerField(default='Sin duracion', blank=True)
 
-    def create_ActividadTiempoReal(self, nombre, descripcion, categoria, fechaYHora, persona):
-        actividad_tiempo_real = super(nombre, descripcion, categoria, fechaYHora, persona)
+    def create_actividad_tiempo_real(self, nombre, descripcion, categoria, fecha_y_hora, persona):
+        actividad_tiempo_real = super().create_abs_actividad(nombre, descripcion, categoria, fecha_y_hora, persona)
         actividad_tiempo_real.save()
 
         return actividad_tiempo_real
@@ -158,9 +158,9 @@ class ActividadTiempoReal(AbsActividad):
 class ActividadAPosteriori(AbsActividad):
     duracion = models.IntegerField(default='Sin duracion', blank=False)
 
-    def create_ActividadAPosteriori(self, nombre, descripcion, categoria, fechaYHora, duracion, persona):
-        actividad_tipo = ActividadTipo(duracion=duracion)
-        super(nombre, descripcion, categoria, fechaYHora, persona)
+    def create_actividad_a_posteriori(self, nombre, descripcion, categoria, fecha_y_hora, duracion, persona):
+        actividad_tipo = super().create_abs_actividad(nombre, descripcion, categoria, fecha_y_hora, persona)
+        actividad_tipo.duracion = duracion
         actividad_tipo.save()
 
         return actividad_tipo
