@@ -229,3 +229,13 @@ table {
 .hiddenn {
     display: none;
 }
+
+.header-bg{
+    background: #2C2C2C;
+}
+
+.group-input{
+    background-color: #f2f2f2;
+    border-radius: 5px;
+
+}
