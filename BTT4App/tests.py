@@ -24,9 +24,9 @@ class test_models(TestCase):
         self._actividad_tipo.create_actividad_tipo("estudiar", "estudiar mucho", "academico")
 
         self._actividad_tiempo_real.create_actividad("entrenar", "entrenar Voleibol", "deporte",
-                                                               "2019.10.10 14:30", self._persona_natural_1)
+                                                               "2019.10.10 14:30", self._persona_natural_1, "real")
         self._actividad_a_posteriori.create_actividad("jugar", "jugar Catan", "sacar la vuelta",
-                                                                 "2019.10.10 10:00", self._persona_natural_1)
+                                                                 "2019.10.10 10:00", self._persona_natural_1, "posteriori")
 
     def test_gets(self):
         self.assertTrue(self._persona_natural_1.get_nombre(), "nom1")
