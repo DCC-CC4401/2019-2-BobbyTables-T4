@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 
 class PersonaNatural(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    fotoDePerfil = models.ImageField(blank=True)
+    fotoDePerfil = models.ImageField(blank=True, null=True)
     amigos = models.ManyToManyField('self', blank=True)
     solicitudesPendientes = models.ManyToManyField('self', blank=True)
 
@@ -12,7 +12,6 @@ class PersonaNatural(models.Model):
         """
         Creates and saves a User with the given email and password.
         """
-
         if not primerNombre:
             raise ValueError('Usuarios deben tener un nombre.')
         if not apellido:
@@ -22,7 +21,7 @@ class PersonaNatural(models.Model):
         if not password:
             raise ValueError('Usuarios deben tener una contraseña.')
 
-        user = User(first_name=primerNombre, last_name=apellido, email=email, password=password)
+        user = User(first_name=primerNombre, last_name=apellido, email=email, username=email, password=password)
         user.save()
 
         persona_natural = PersonaNatural(user=user)
@@ -44,14 +43,14 @@ class PersonaNatural(models.Model):
 
 
 class Administrador(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, default="", editable=False)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
 
     def create_superuser(self, email, password):
         """
         Creates and saves a superuser with the given email and password.
         """
 
-        user = User(email=email, password=password, is_superuser=True)
+        user = User(email=email, username=email, password=password, is_superuser=True)
         user.save()
 
         admin = Administrador(user=user)
@@ -67,9 +66,9 @@ class Administrador(models.Model):
 
 
 class IActividad(models.Model):
-    nombre = models.CharField(max_length=100, blank=False)
-    descripcion = models.CharField(max_length=100, blank=False)
-    categoria = models.CharField(max_length=100, blank=False)
+    nombre = models.CharField(max_length=100, blank=False, null=True)
+    descripcion = models.CharField(max_length=100, blank=False, null=True)
+    categoria = models.CharField(max_length=100, blank=False, null=True)
 
     def create_i_actividad(self, nombre, descripcion, categoria):
         actividad = IActividad(nombre=nombre, descripcion=descripcion, categoria=categoria)
@@ -88,8 +87,8 @@ class IActividad(models.Model):
 
 
 class ActividadTipo(IActividad):
-    fecha_y_hora = models.DateTimeField(default='Sin fecha', blank=True)
-    duracion = models.IntegerField(default='Sin duracion', blank=True)
+    fecha_y_hora = models.DateTimeField(default='Sin fecha', blank=True, null=True)
+    duracion = models.IntegerField(default='Sin duracion', blank=True, null=True)
     persona = models.ForeignKey(PersonaNatural, models.SET_NULL, null=True, blank=True)
 
     def create_actividad_tipo(self, nombre, descripcion, categoria):
@@ -118,9 +117,9 @@ class ActividadTipo(IActividad):
 
 
 class Actividad(IActividad):
-    fecha_y_hora = models.DateTimeField(default='Sin fecha', blank=False)
+    fecha_y_hora = models.DateTimeField(default='Sin fecha', blank=False, null=True)
     persona = models.ForeignKey(PersonaNatural, models.SET_NULL, null=True, blank=False)
-    duracion = models.IntegerField(default='Sin duracion', blank=True)
+    duracion = models.IntegerField(default='Sin duracion', blank=True, null=True)
 
     def create_actividad(self, nombre, descripcion, categoria, fecha_y_hora, persona, tiempo):
         actividad = super().create_i_actividad(nombre, descripcion, categoria)
@@ -128,7 +127,6 @@ class Actividad(IActividad):
         actividad.persona = persona
         actividad.tiempo = tiempo
         actividad.save()
-
 
         return actividad
 
