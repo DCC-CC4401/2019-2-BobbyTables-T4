@@ -2,9 +2,6 @@ from django.db import models
 from django.contrib.auth.hashers import check_password
 from django.contrib.auth.models import User
 
-
-# Create your models here.
-
 class PersonaNatural(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     fotoDePerfil = models.ImageField(blank=True)
@@ -120,17 +117,19 @@ class ActividadTipo(IActividad):
         return self.persona
 
 
-class AbsActividad(IActividad):
+class Actividad(IActividad):
     fecha_y_hora = models.DateTimeField(default='Sin fecha', blank=False)
     persona = models.ForeignKey(PersonaNatural, models.SET_NULL, null=True, blank=False)
+    duracion = models.IntegerField(default='Sin duracion', blank=True)
 
-    def create_abs_actividad(self, nombre, descripcion, categoria, fecha_y_hora, persona):
-        abs_actividad = super().create_i_actividad(nombre, descripcion, categoria)
-        abs_actividad.fecha_y_hora = fecha_y_hora
-        abs_actividad.persona = persona
-        abs_actividad.save()
+    def create_actividad(self, nombre, descripcion, categoria, fecha_y_hora, persona, tiempo):
+        actividad = super().create_i_actividad(nombre, descripcion, categoria)
+        actividad.fecha_y_hora = fecha_y_hora
+        actividad.persona = persona
+        actividad.tiempo = tiempo
+        actividad.save()
 
-        return abs_actividad
+        return actividad
 
     def get_fecha_y_hora(self):
         return self.fecha_y_hora
@@ -138,32 +137,14 @@ class AbsActividad(IActividad):
     def get_persona(self):
         return self.persona
 
-
-class ActividadTiempoReal(AbsActividad):
-    duracion = models.IntegerField(default='Sin duracion', blank=True)
-
-    def create_actividad_tiempo_real(self, nombre, descripcion, categoria, fecha_y_hora, persona):
-        actividad_tiempo_real = super().create_abs_actividad(nombre, descripcion, categoria, fecha_y_hora, persona)
-        actividad_tiempo_real.save()
-
-        return actividad_tiempo_real
-
     def set_duracion(self, duracion):
         self.duracion = duracion
 
     def get_duracion(self):
         return self.duracion
 
+    def set_tiempo(self, tiempo):
+        self.tiempo = tiempo
 
-class ActividadAPosteriori(AbsActividad):
-    duracion = models.IntegerField(default='Sin duracion', blank=False)
-
-    def create_actividad_a_posteriori(self, nombre, descripcion, categoria, fecha_y_hora, duracion, persona):
-        actividad_tipo = super().create_abs_actividad(nombre, descripcion, categoria, fecha_y_hora, persona)
-        actividad_tipo.duracion = duracion
-        actividad_tipo.save()
-
-        return actividad_tipo
-
-    def get_duracion(self):
-        return self.duracion
+    def get_tiempo(self):
+        return self.tiempo
