@@ -44,7 +44,7 @@ class PersonaNatural(models.Model):
 
 
 class Administrador(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, default="", editable=False)
 
     def create_superuser(self, email, password):
         """
@@ -128,6 +128,7 @@ class Actividad(IActividad):
         actividad.persona = persona
         actividad.tiempo = tiempo
         actividad.save()
+
 
         return actividad
 

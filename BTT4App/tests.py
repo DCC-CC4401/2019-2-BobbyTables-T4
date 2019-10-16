@@ -2,10 +2,6 @@ import unittest
 from django.test import TestCase
 from BTT4App.models import *
 
-
-# Create your tests here.
-
-
 class test_models(TestCase):
 
     def setUp(self):
