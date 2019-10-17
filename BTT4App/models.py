@@ -2,13 +2,14 @@ from django.db import models
 from django.contrib.auth.hashers import check_password
 from django.contrib.auth.models import User
 
+
 class PersonaNatural(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     fotoDePerfil = models.ImageField(blank=True, null=True)
     amigos = models.ManyToManyField('self', blank=True)
     solicitudesPendientes = models.ManyToManyField('self', blank=True)
 
-    def create_user(self, primerNombre, apellido, email, password):
+    def create_persona(self, primerNombre, apellido, email, password):
         """
         Creates and saves a User with the given email and password.
         """
@@ -21,7 +22,8 @@ class PersonaNatural(models.Model):
         if not password:
             raise ValueError('Usuarios deben tener una contraseña.')
 
-        user = User(first_name=primerNombre, last_name=apellido, email=email, username=email, password=password)
+        user = User.objects.create_user(first_name=primerNombre, last_name=apellido, email=email, username=email,
+                                        password=password)
         user.save()
 
         persona_natural = PersonaNatural(user=user)
@@ -30,27 +32,29 @@ class PersonaNatural(models.Model):
         return persona_natural
 
     def get_nombre(self):
+        # self.user.get_short_name()
         return self.user.first_name
 
     def get_apellido(self):
         return self.user.last_name
 
     def get_email(self):
+        # self.user.get_username()
         return self.user.email
 
-    def get_password(self):
+    def get_contrasena(self):
         return self.user.password
 
 
 class Administrador(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
 
-    def create_superuser(self, email, password):
+    def create_administrador(self, email, password):
         """
         Creates and saves a superuser with the given email and password.
         """
 
-        user = User(email=email, username=email, password=password, is_superuser=True)
+        user = User.objects.create_superuser(email=email, username=email, password=password)
         user.save()
 
         admin = Administrador(user=user)

@@ -17,9 +17,9 @@ class test_models(TestCase):
         # self._actividad_tiempo_real = Actividad()
         # self._actividad_a_posteriori = Actividad()
 
-        self._persona_natural_1.create_user("nom1", "ape1", "cor1@gmail.com", "contra1")
-        self._persona_natural_2.create_user("nom2", "ape2", "cor2@gmail.com", "contra2")
-        self._admin.create_superuser("admin@admin.admin", "admin")
+        self._persona_natural_1.create_persona("nom1", "ape1", "cor1@gmail.com", "contra1")
+        self._persona_natural_2.create_persona("nom2", "ape2", "cor2@gmail.com", "contra2")
+        self._admin.create_administrador("admin@admin.admin", "admin")
 
         # self._actividad_tipo.create_actividad_tipo("estudiar", "estudiar mucho", "academico")
         #
@@ -29,6 +29,9 @@ class test_models(TestCase):
         #                                                          "2019.10.10 10:00", self._persona_natural_1, "posteriori")
 
     def test_gets(self):
+        # self.assertTrue(self._persona_natural_1.user.check_password("contra1"))
+        self.assertEqual("contra1", self._persona_natural_1.get_contrasena())
         self.assertEqual(self._persona_natural_1.get_nombre(), "nom1")
-        self.assertEqual(self._persona_natural_2.get_nombre(), "nom2")
-        self.assertNotEqual(self._persona_natural_1.get_email(), "nom1")
+        self.assertEqual(self._persona_natural_2.get_email(), "cor1@gmail.com")
+        # self.assertEqual(self._persona_natural_2.user.get_short_name(), "nom2")
+        # self.assertEqual(self._persona_natural_1.user.get_username(), "cor1@gmail.com")
