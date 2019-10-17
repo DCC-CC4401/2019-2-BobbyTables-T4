@@ -30,20 +30,16 @@
             </div>
             <div class="col-8 text-right text-white">
                 <form method="post">
-                    {% comment %}{% csrf_token %}
-                            <!--Ingresar nombre de usuario y contraseña-->
-                            {{ form }}{% endcomment %}
-                    <!--Boton de iniciar sesion-->
-
+                        {% csrf_token %}
                         <div class="row">
                             <div class="col-4"></div>
                             <div class="form-group col-3 ">
                                 <label for="username">Nombre de Usuario o Email</label>
-                                <input type="email" class="form-control group-input" id="username" placeholder="Ingresa tu email">
+                                <input type="text" class="form-control group-input px-2" id="username" placeholder="Ingresa tu email">
                             </div>
                             <div class="form-group col-3">
                                 <label for="Password">Contraseña</label>
-                                <input type="password" class="form-control group-input" id="Password" placeholder="***********">
+                                <input type="password" class="form-control group-input px-2" id="Password" placeholder="***********">
                             </div>
                             <div class="col-2 align-self-center">
                                 <button type="submit" class="btn btn-primary"> Iniciar sesión</button>
@@ -61,44 +57,44 @@
     <!--Información de la página-->
     <div class="container-fluid text-left p-4">
 
-    <!--Registro de usuario-->
-    <div class="container-fluid text-right col-md-11 ml-3 text-white">
-        <h3 class="text-black-50">¡Regístrate!</h3>
-        <h5 class="text-black-50">En pocos pasos podras medir tu tiempo!</h5>
-    </div>
-    <div class="row">
-        <div class="col-8">
-            <div class="card">
-                <img src="{% static 'img/turing.png' %}" class="card-img-top" alt="...">
+        <!--Registro de usuario-->
+        <div class="container-fluid text-right col-md-11 ml-3 text-white">
+            <h3 class="text-black-50">¡Regístrate!</h3>
+            <h5 class="text-black-50">En pocos pasos podras medir tu tiempo!</h5>
+        </div>
+        <div class="row">
+            <div class="col-8">
+                <div class="card">
+                    <img src="{% static 'img/turing.png' %}" class="card-img-top" alt="...">
+                </div>
             </div>
-        </div>
 
-        <div class="card col-3">
-            <form>
-                <div class="form-group text-right">
-                    <input type="text" name="name" placeholder="Nombre" class="form-control"/>
-                </div>
-                <div class="form-group">
-                    <input type="text" name="surname" placeholder="Apellido" class="form-control"/>
-                </div>
-                <div class="form-group">
-                    <input type="email" name="email" placeholder="Correo electrónico" class="form-control"/>
-                </div>
-                <div class="form-group">
-                    <input type="password" name="password" placeholder="Contraseña" class="form-control"/>
-                </div>
-                <div class="form-group">
-                    <input type="password" name="password2" placeholder="Confirme contraseña" class="form-control"/>
-                </div>
-
-                <div class="row">
-                    <div class="col-7"></div>
-                    <div class="col-1">
-                        <button type="submit" class="btn btn-primary m-2 flex-row">Registrarse</button>
+            <div class="card col-3">
+                <form>
+                    <div class="form-group text-right">
+                        <input type="text" name="name" placeholder="Nombre" class="form-control"/>
                     </div>
-                </div>
-            </form>
-        </div>
+                    <div class="form-group">
+                        <input type="text" name="lastname" placeholder="Apellido" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" name="email" placeholder="Correo electrónico" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" name="password" placeholder="Contraseña" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" name="password2" placeholder="Confirme contraseña" class="form-control"/>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-7"></div>
+                        <div class="col-1">
+                            <button type="submit" class="btn btn-primary m-2 flex-row">Registrarse</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
 
     </div>
 
