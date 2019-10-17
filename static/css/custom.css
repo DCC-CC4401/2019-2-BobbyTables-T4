@@ -227,5 +227,17 @@ table {
 }
 
 .hiddenn {
-    display: none;
+    /*display: none;*/
 }
+
+.header-bg{
+    background: #2C2C2C;
+}
+
+.group-input,
+.group-input:focus{
+    background-color: #f2f2f2;
+    border-radius: 5px;
+
+}
+

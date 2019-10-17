@@ -1,0 +1,103 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <title>Login</title>
+    <!-- BOOTSTRAP CSS, DO NOT DELETE -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/custom.css' %}"/>
+    <script src="https://code.jquer statiy.com/jquery-3.2.1.min.js"></script>
+</head>
+
+<body class="bckg min-vh-100">
+<!-- BOOTSTRAP JS, DO NOT DELETE -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+
+    <!--Barra de login-->
+    <div class="container-fluid text-center p-4">
+        <div class="row p-2 mx-2 rounded shadow header-bg ">
+            <div class="col-4 text-left text-white">
+                <h2 class="pt-2">LOGO</h2>
+            </div>
+            <div class="col-8 text-right text-white">
+                <form method="post">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-4"></div>
+                            <div class="form-group col-3 ">
+                                <label for="username">Nombre de Usuario o Email</label>
+                                <input type="text" class="form-control group-input px-2" id="username" placeholder="Ingresa tu email">
+                            </div>
+                            <div class="form-group col-3">
+                                <label for="Password">Contraseña</label>
+                                <input type="password" class="form-control group-input px-2" id="Password" placeholder="***********">
+                            </div>
+                            <div class="col-2 align-self-center">
+                                <button type="submit" class="btn btn-primary"> Iniciar sesión</button>
+                            </div>
+                        </div>
+
+                </form>
+                {% if invalid %}
+                    Nombre de usuario y/o contraseña inválida.
+                {% endif %}
+
+            </div>
+        </div>
+    </div>
+    <!--Información de la página-->
+    <div class="container-fluid text-left p-4">
+
+        <!--Registro de usuario-->
+        <div class="container-fluid text-right col-md-11 ml-3 text-white">
+            <h3 class="text-black-50">¡Regístrate!</h3>
+            <h5 class="text-black-50">En pocos pasos podras medir tu tiempo!</h5>
+        </div>
+        <div class="row">
+            <div class="col-8">
+                <div class="card">
+                    <img src="{% static 'img/turing.png' %}" class="card-img-top" alt="...">
+                </div>
+            </div>
+
+            <div class="card col-3">
+                <form>
+                    <div class="form-group text-right">
+                        <input type="text" name="name" placeholder="Nombre" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="lastname" placeholder="Apellido" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" name="email" placeholder="Correo electrónico" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" name="password" placeholder="Contraseña" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" name="password2" placeholder="Confirme contraseña" class="form-control"/>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-7"></div>
+                        <div class="col-1">
+                            <button type="submit" class="btn btn-primary m-2 flex-row">Registrarse</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+    </div>
+
+
+</body>
+</html>

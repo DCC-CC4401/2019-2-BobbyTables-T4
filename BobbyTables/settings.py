@@ -126,12 +126,9 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR,'static')
 ]
 
-GRAPH_MODELS = {
-  'all_applications': True,
-  'group_models': True,
-}
 
 GRAPH_MODELS = {
   'all_applications': True,
   'group_models': True,
 }
+
