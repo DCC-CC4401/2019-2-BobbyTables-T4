@@ -18,13 +18,13 @@ def login(request):
     if request.method == "POST":
         form = LoginForm(data=request.POST)
         if form.is_valid():
-            username = form.changed_data['username']
-            password = form.changed_data['password']
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+
             user = authenticate(username=username, password=password)
             if user is not None:
                 do_login(request,user)
-                return redirect('home/')
-
+                return render(request, 'landingPage.html')
     return render(request, 'login.html', {'form': form})
 
 def register(request):
