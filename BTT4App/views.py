@@ -23,7 +23,7 @@ def login(request):
             user = authenticate(username=username, password=password)
             if user is not None:
                 do_login(request,user)
-                return redirect('index/')
+                return redirect('home/')
 
     return render(request, 'login.html', {'form': form})
 
