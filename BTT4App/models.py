@@ -69,17 +69,13 @@ class Administrador(models.Model):
         return self.user.password
 
 
-
-
-
 class ActividadTipo(models.Model):
 
     nombre = models.CharField(max_length=100, blank=False, null=True)
     descripcion = models.CharField(max_length=100, blank=False, null=True)
     categoria = models.CharField(max_length=100, blank=False, null=True)
-
-    fecha_y_hora = models.DateTimeField(default='Sin fecha', blank=True, null=True)
-    duracion = models.IntegerField(default='Sin duracion', blank=True, null=True)
+    fecha_y_hora = models.DateTimeField(blank=True, null=True)
+    duracion = models.IntegerField(default=0, blank=True, null=True)
     persona = models.ForeignKey(PersonaNatural, models.SET_NULL, null=True, blank=True)
 
     def create_actividad_tipo(self, nombre, descripcion, categoria):
@@ -121,10 +117,9 @@ class Actividad(models.Model):
     nombre = models.CharField(max_length=100, blank=False, null=True)
     descripcion = models.CharField(max_length=100, blank=False, null=True)
     categoria = models.CharField(max_length=100, blank=False, null=True)
-
-    fecha_y_hora = models.DateTimeField(default='Sin fecha', blank=False, null=True)
+    fecha_y_hora = models.DateTimeField(blank=False, null=True)
     persona = models.ForeignKey(PersonaNatural, models.SET_NULL, null=True, blank=False)
-    duracion = models.IntegerField(default='Sin duracion', blank=True, null=True)
+    duracion = models.IntegerField(default=0, blank=True, null=True)
 
     def create_actividad(self, nombre, descripcion, categoria, fecha_y_hora, persona, tiempo):
         if not ( tiempo == "post" or tiempo == "real"):
