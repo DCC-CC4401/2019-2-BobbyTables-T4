@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.hashers import check_password
 from django.contrib.auth.models import User
+from django.utils.timezone import now
+from datetime import datetime
 
 
 class PersonaNatural(models.Model):
@@ -48,13 +50,16 @@ class PersonaNatural(models.Model):
 
 class Administrador(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    contrasena = models.CharField(max_length=30, default="")
 
     def create_administrador(self, email, password):
         """
         Creates and saves a superuser with the given email and password.
         """
 
-        user = User.objects.create_superuser(email=email, username=email, password=password)
+        user = User.objects.create_superuser(email=email, username=email, password=None)
+        user.set_password(raw_password=password)
+        user.contrasena = password
         user.save()
 
         admin = Administrador(user=user)
@@ -65,8 +70,60 @@ class Administrador(models.Model):
     def get_email(self):
         return self.user.email
 
-    def get_password(self):
-        return self.user.password
+    # def get_contrasena(self):
+    #     return self.user.password
+
+    def check_contrasena(self):
+        return check_password(self.user.contrasena, self.user.password)
+
+
+class Actividad(models.Model):
+
+    nombre = models.CharField(max_length=100, blank=False, null=True)
+    descripcion = models.CharField(max_length=100, blank=False, null=True)
+    categoria = models.CharField(max_length=100, blank=False, null=True)
+    fecha_y_hora = models.DateTimeField(default=now, blank=False, null=True)
+    persona = models.ForeignKey(PersonaNatural, models.SET_NULL, null=True, blank=False)
+    duracion = models.IntegerField(default=0, blank=True, null=True)
+
+    def create_actividad(self, nombre, descripcion, categoria, fecha_y_hora, persona, tiempo):
+        if not ( tiempo == "post" or tiempo == "real"):
+            raise ValueError("tiempo debe ser 'post' o 'real' (a posteriori o en tiempo real respectivamente).")
+
+        actividad = Actividad(nombre=nombre, descripcion=descripcion, categoria=categoria)
+        actividad.fecha_y_hora = datetime.strptime(fecha_y_hora, '%Y/%m/%d %H:%M:%S')
+        actividad.persona = persona
+        actividad.tiempo = tiempo
+        actividad.save()
+
+        return actividad
+
+    def get_nombre(self):
+        return self.nombre
+
+    def get_descripcion(self):
+        return self.descripcion
+
+    def get_categoria(self):
+        return self.categoria
+
+    def get_fecha_y_hora(self):
+        return self.fecha_y_hora.strftime("%Y/%m/%d %H:%M:%S")
+
+    def get_persona(self):
+        return self.persona
+
+    def get_duracion(self):
+        return self.duracion
+
+    def get_tiempo(self):
+        return self.tiempo
+
+    def set_duracion(self, duracion):
+        self.duracion = duracion
+
+    def set_tiempo(self, tiempo):
+        self.tiempo = tiempo
 
 
 class ActividadTipo(models.Model):
@@ -74,7 +131,7 @@ class ActividadTipo(models.Model):
     nombre = models.CharField(max_length=100, blank=False, null=True)
     descripcion = models.CharField(max_length=100, blank=False, null=True)
     categoria = models.CharField(max_length=100, blank=False, null=True)
-    fecha_y_hora = models.DateTimeField(blank=True, null=True)
+    fecha_y_hora = models.DateTimeField(default=now, blank=True, null=True)
     duracion = models.IntegerField(default=0, blank=True, null=True)
     persona = models.ForeignKey(PersonaNatural, models.SET_NULL, null=True, blank=True)
 
@@ -94,7 +151,7 @@ class ActividadTipo(models.Model):
         return self.categoria
 
     def get_fecha_y_hora(self):
-        return self.fecha_y_hora
+        return self.fecha_y_hora.strftime("%Y/%m/%d %H:%M:%S")
 
     def get_duracion(self):
         return self.duracion
@@ -103,59 +160,10 @@ class ActividadTipo(models.Model):
         return self.persona
 
     def set_fecha_y_hora(self, fecha_y_hora):
-        self.fecha_y_hora = fecha_y_hora
+        self.fecha_y_hora = datetime.strptime(fecha_y_hora, '%Y/%m/%d %H:%M:%S')
 
     def set_duracion(self, duracion):
         self.duracion = duracion
 
     def set_persona(self, persona):
         self.persona = persona
-
-
-class Actividad(models.Model):
-
-    nombre = models.CharField(max_length=100, blank=False, null=True)
-    descripcion = models.CharField(max_length=100, blank=False, null=True)
-    categoria = models.CharField(max_length=100, blank=False, null=True)
-    fecha_y_hora = models.DateTimeField(blank=False, null=True)
-    persona = models.ForeignKey(PersonaNatural, models.SET_NULL, null=True, blank=False)
-    duracion = models.IntegerField(default=0, blank=True, null=True)
-
-    def create_actividad(self, nombre, descripcion, categoria, fecha_y_hora, persona, tiempo):
-        if not ( tiempo == "post" or tiempo == "real"):
-            raise ValueError("tiempo debe ser 'post' o 'real' (a posteriori o en tiempo real respectivamente).")
-
-        actividad = Actividad(nombre=nombre, descripcion=descripcion, categoria=categoria)
-        actividad.fecha_y_hora = fecha_y_hora
-        actividad.persona = persona
-        actividad.tiempo = tiempo
-        actividad.save()
-
-        return actividad
-
-    def get_nombre(self):
-        return self.nombre
-
-    def get_descripcion(self):
-        return self.descripcion
-
-    def get_categoria(self):
-        return self.categoria
-
-    def get_fecha_y_hora(self):
-        return self.fecha_y_hora
-
-    def get_persona(self):
-        return self.persona
-
-    def get_duracion(self):
-        return self.duracion
-
-    def get_tiempo(self):
-        return self.tiempo
-
-    def set_duracion(self, duracion):
-        self.duracion = duracion
-
-    def set_tiempo(self, tiempo):
-        self.tiempo = tiempo
