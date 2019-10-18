@@ -1,17 +1,22 @@
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as do_login
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth import logout as do_logout
+from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
+from BTT4App.models import *
 
 # Create your views here.
 from BTT4App.forms import LoginForm, RegisterForm
 
-
+@login_required(login_url='../login/')
 def landingPage(request):
     return render(request, 'landingPage.html')
 
+@login_required(login_url='../login/')
 def profile(request):
     return render(request, 'userProfile.html')
+
 
 def login(request):
     form = LoginForm()
@@ -24,21 +29,33 @@ def login(request):
             user = authenticate(username=username, password=password)
             if user is not None:
                 do_login(request,user)
-                return render(request, 'landingPage.html')
+                #return render(request, 'landingPage.html')
+                return HttpResponseRedirect(request.GET['next'])
+        regForm = RegisterForm(data=request.POST)
+        print(regForm.errors)
+        if regForm.is_valid():
+            if User.objects.filter(username=regForm.cleaned_data['email']).exists():
+                return render(request, 'login.html', {'form': form,
+                                                      'error_massage': 'Email existente, utilice otro'})
+            elif regForm.cleaned_data['password'] != regForm.cleaned_data['password2']:
+                return  render(request, 'login.html', {'form': form,
+                                                       'error_message':'Contraseñas no coinciden'})
+            else:
+                user = PersonaNatural()
+                user.create_persona(regForm.cleaned_data['name'],
+                                    regForm.cleaned_data['lastname'],
+                                    regForm.cleaned_data['email'],
+                                    regForm.cleaned_data['password'])
+
+                user = authenticate(username=regForm.cleaned_data['email'], password=regForm.cleaned_data['password'])
+                if user is not None:
+                    do_login(request,user)
+                    #return render(request, 'landingPage.html')
+                    return HttpResponseRedirect(request.GET['next'])
     return render(request, 'login.html', {'form': form})
 
-def register(request):
-    regForm = RegisterForm()
-    if request.method == "POST":
-        regForm = RegisterForm(data=request.POST)
-        if regForm.is_valid():
-            user = regForm.save()
-            if user is not None:
-                do_login(request,user)
-                return redirect('/')
-    regForm.fields['name'].help_text = None
-    regForm.fields['lastname'].help_text = None
-    regForm.fields['email'].help_text = None
-    regForm.fields['password'].help_text = None
-    regForm.fields['password2'].help_text = None
-    return render(request, 'login.html', {'form':regForm})
+def logout(request):
+    if request.method == "GET":
+        do_logout(request)
+        return redirect('/')
+

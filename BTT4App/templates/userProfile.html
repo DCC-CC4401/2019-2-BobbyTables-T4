@@ -1,13 +1,14 @@
 {% extends 'base_generic.html' %}
 {% load staticfiles %}
 {% block body %}
+    {% if user.is_active %}
     <div class="container-fluid p-4 main">
         <div class="row">
             <img src="{% static 'img/turing.jpg' %}" class="circular mx-auto d-block shadow" height="250px">
         </div>
         <div class="row py-4">
             <div class="col text-center">
-                <p class="h4 text-center text-dark">Nombre de usuario</p>
+                <p class="h4 text-center text-dark">{{ user.first_name }} {{ user.last_name }}</p>
                 <button type="button" class="btn btn-success">Cambiar imagen</button>
             </div>
         </div>
@@ -51,7 +52,7 @@
                             <div class="form-group">
                                 <label for="disabledTextInput">Nombre:</label>
                                 <input type="text" id="disabledTextInputNombre" class="form-control"
-                                       placeholder="Nombre usuario">
+                                       placeholder=" {{ user.first_name }}">
                             </div>
                         </fieldset>
 
@@ -60,7 +61,7 @@
                             <div class="form-group">
                                 <label for="disabledTextInput">Apellidos:</label>
                                 <input type="text" id="disabledTextInputApellidos" class="form-control"
-                                       placeholder="Apellidos usuario">
+                                       placeholder="{{ user.last_name }}">
                             </div>
                         </fieldset>
 
@@ -69,7 +70,7 @@
                             <div class="form-group">
                                 <label for="disabledTextInput">Correo electronico:</label>
                                 <input type="text" id="disabledTextInput" class="form-control"
-                                       placeholder="correo@usuario.com">
+                                       placeholder="{{ user.email}}">
                             </div>
                         </fieldset>
 
@@ -302,6 +303,7 @@
             </div>
         </div>
     </div>
+    {% endif %}
 
     <!-- BOOTSTRAP JS, DO NOT DELETE -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -312,6 +314,7 @@
             crossorigin="anonymous"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
     <script src="{% static 'js/toggleName.js' %}"></script>
+    <script src="{% static 'js/pestanas.js' %}"></script>
 
 {% endblock %}
 
