@@ -69,13 +69,71 @@ class Administrador(models.Model):
         return self.user.password
 
 
-class IActividad(models.Model):
+
+
+
+class ActividadTipo(models.Model):
+
     nombre = models.CharField(max_length=100, blank=False, null=True)
     descripcion = models.CharField(max_length=100, blank=False, null=True)
     categoria = models.CharField(max_length=100, blank=False, null=True)
 
-    def create_i_actividad(self, nombre, descripcion, categoria):
-        actividad = IActividad(nombre=nombre, descripcion=descripcion, categoria=categoria)
+    fecha_y_hora = models.DateTimeField(default='Sin fecha', blank=True, null=True)
+    duracion = models.IntegerField(default='Sin duracion', blank=True, null=True)
+    persona = models.ForeignKey(PersonaNatural, models.SET_NULL, null=True, blank=True)
+
+    def create_actividad_tipo(self, nombre, descripcion, categoria):
+        actividad_tipo = ActividadTipo(nombre=nombre, descripcion=descripcion, categoria=categoria)
+        actividad_tipo.save()
+
+        return actividad_tipo
+
+    def get_nombre(self):
+        return self.nombre
+
+    def get_descripcion(self):
+        return self.descripcion
+
+    def get_categoria(self):
+        return self.categoria
+
+    def get_fecha_y_hora(self):
+        return self.fecha_y_hora
+
+    def get_duracion(self):
+        return self.duracion
+
+    def get_persona(self):
+        return self.persona
+
+    def set_fecha_y_hora(self, fecha_y_hora):
+        self.fecha_y_hora = fecha_y_hora
+
+    def set_duracion(self, duracion):
+        self.duracion = duracion
+
+    def set_persona(self, persona):
+        self.persona = persona
+
+
+class Actividad(models.Model):
+
+    nombre = models.CharField(max_length=100, blank=False, null=True)
+    descripcion = models.CharField(max_length=100, blank=False, null=True)
+    categoria = models.CharField(max_length=100, blank=False, null=True)
+
+    fecha_y_hora = models.DateTimeField(default='Sin fecha', blank=False, null=True)
+    persona = models.ForeignKey(PersonaNatural, models.SET_NULL, null=True, blank=False)
+    duracion = models.IntegerField(default='Sin duracion', blank=True, null=True)
+
+    def create_actividad(self, nombre, descripcion, categoria, fecha_y_hora, persona, tiempo):
+        if not ( tiempo == "post" or tiempo == "real"):
+            raise ValueError("tiempo debe ser 'post' o 'real' (a posteriori o en tiempo real respectivamente).")
+
+        actividad = Actividad(nombre=nombre, descripcion=descripcion, categoria=categoria)
+        actividad.fecha_y_hora = fecha_y_hora
+        actividad.persona = persona
+        actividad.tiempo = tiempo
         actividad.save()
 
         return actividad
@@ -89,65 +147,20 @@ class IActividad(models.Model):
     def get_categoria(self):
         return self.categoria
 
-
-class ActividadTipo(IActividad):
-    fecha_y_hora = models.DateTimeField(default='Sin fecha', blank=True, null=True)
-    duracion = models.IntegerField(default='Sin duracion', blank=True, null=True)
-    persona = models.ForeignKey(PersonaNatural, models.SET_NULL, null=True, blank=True)
-
-    def create_actividad_tipo(self, nombre, descripcion, categoria):
-        actividad_tipo = super().create_i_actividad(nombre, descripcion, categoria)
-        actividad_tipo.save()
-
-        return actividad_tipo
-
-    def set_fecha_y_hora(self, fecha_y_hora):
-        self.fecha_y_hora = fecha_y_hora
-
-    def set_duracion(self, duracion):
-        self.duracion = duracion
-
-    def set_persona(self, persona):
-        self.persona = persona
-
-    def get_fecha_y_hora(self):
-        return self.fecha_y_hora
-
-    def get_duracion(self):
-        return self.duracion
-
-    def get_persona(self):
-        return self.persona
-
-
-class Actividad(IActividad):
-    fecha_y_hora = models.DateTimeField(default='Sin fecha', blank=False, null=True)
-    persona = models.ForeignKey(PersonaNatural, models.SET_NULL, null=True, blank=False)
-    duracion = models.IntegerField(default='Sin duracion', blank=True, null=True)
-
-    def create_actividad(self, nombre, descripcion, categoria, fecha_y_hora, persona, tiempo):
-        actividad = super().create_i_actividad(nombre, descripcion, categoria)
-        actividad.fecha_y_hora = fecha_y_hora
-        actividad.persona = persona
-        actividad.tiempo = tiempo
-        actividad.save()
-
-        return actividad
-
     def get_fecha_y_hora(self):
         return self.fecha_y_hora
 
     def get_persona(self):
         return self.persona
 
-    def set_duracion(self, duracion):
-        self.duracion = duracion
-
     def get_duracion(self):
         return self.duracion
-
-    def set_tiempo(self, tiempo):
-        self.tiempo = tiempo
 
     def get_tiempo(self):
         return self.tiempo
+
+    def set_duracion(self, duracion):
+        self.duracion = duracion
+
+    def set_tiempo(self, tiempo):
+        self.tiempo = tiempo
