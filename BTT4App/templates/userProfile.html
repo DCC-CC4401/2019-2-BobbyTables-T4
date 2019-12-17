@@ -87,8 +87,8 @@
 
                 <!--PESTAÑA SEGURIDAD-->
                 <div class="tab-pane fade show disabled" id="Seguridad" role="tabpanel" aria-labelledby="Seguridad-tab">
-                    <form>
-                        <!--Contraseña actual-->
+                 <!--   <form>
+                        < !--Contraseña actual-- >
                         <fieldset disabled>
                             <div class="form-group">
                                 <label for="disabledTextInput">Contraseña actual:</label>
@@ -97,22 +97,28 @@
                             </div>
                         </fieldset>
 
-                        <!--Contraseña nueva-->
+                        <! --Contraseña nueva-- >
                         <div class="form-group">
                             <label for="exampleInputEmail1">Nueva Contraseña</label>
                             <input type="email" class="form-control" id="exampleInputEmail1"
                                    aria-describedby="emailHelp" placeholder="Nueva Contraseña">
                         </div>
 
-                        <!--Contraseña confirmacion-->
+                        < !--Contraseña confirmacion-- >
                         <div class="form-group">
                             <label for="exampleInputEmail1">Confirmación Contraseña</label>
                             <input type="email" class="form-control" id="Pass-conf" aria-describedby="emailHelp"
                                    placeholder="Confirmación Contraseña">
                         </div>
 
+                    </form> -->
+
+                    <form action="/accounts/password_change">
+
+                        <input type="submit"  class="btn btn-success" value ="Cambiar Contraseña">
+
                     </form>
-                    <button type="submit" class="btn btn-success">Cambiar contraseña</button>
+
                 </div>
 
                 <!--PESTAÑA AMIGOS-->

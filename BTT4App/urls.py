@@ -6,5 +6,6 @@ urlpatterns = [
     path('home/', landingPage, name='landingPage'),
     path('profile/', profile, name='profile'),
     path('login/', login, name='login'),
-    path('logout/', logout, name='logout')
+    path('logout/', logout, name='logout'),
+    path('accounts/', include('django.contrib.auth.urls')),
 ]
