@@ -5,7 +5,8 @@ from django.contrib.auth.models import User
 
 class PersonaNatural(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    fotoDePerfil = models.ImageField(blank=True, null=True)
+    fotoDePerfil = models.ImageField(blank=True, default='profile_pics/turing.jpg', null=True, upload_to='profile_pics' )
+
     amigos = models.ManyToManyField('self', blank=True)
     solicitudesPendientes = models.ManyToManyField('self', blank=True)
 
@@ -44,6 +45,8 @@ class PersonaNatural(models.Model):
 
     def get_contrasena(self):
         return self.user.password
+    def __str__(self):
+        return f'{self.user.username} PersonaNatural'
 
 
 class Administrador(models.Model):

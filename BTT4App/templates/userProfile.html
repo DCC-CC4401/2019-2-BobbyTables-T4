@@ -4,11 +4,11 @@
     {% if user.is_active %}
     <div class="container-fluid p-4 main">
         <div class="row">
-            <img src="{% static 'img/turing.jpg' %}" class="circular mx-auto d-block shadow" height="250px">
+            <img src="{{ user.personanatural.fotoDePerfil.url }}" class="circular mx-auto d-block shadow" height="250px">
         </div>
         <div class="row py-4">
             <div class="col text-center">
-                <p class="h4 text-center text-dark">{{ user.first_name }} {{ user.last_name }}</p>
+                <p class="h4 text-center text-dark">{{ user.first_name}} {{ user.last_name }}</p>
                 <button type="button" class="btn btn-success">Cambiar imagen</button>
             </div>
         </div>
