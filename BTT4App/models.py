@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.hashers import check_password
+from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 
 
@@ -41,10 +41,6 @@ class PersonaNatural(models.Model):
     def get_email(self):
         # self.user.get_username()
         return self.user.email
-
-    def get_contrasena(self):
-        return self.user.password
-
 
 class Administrador(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)

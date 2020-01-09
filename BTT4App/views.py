@@ -1,4 +1,4 @@
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate, update_session_auth_hash
 from django.contrib.auth import login as do_login
 from django.contrib.auth import logout as do_logout
 from django.contrib.auth.decorators import login_required
@@ -7,7 +7,8 @@ from django.shortcuts import render, redirect
 from BTT4App.models import *
 
 # Create your views here.
-from BTT4App.forms import LoginForm, RegisterForm
+from BTT4App.forms import LoginForm, RegisterForm, changePasswordForm
+
 
 @login_required(login_url='../login/')
 def landingPage(request):
@@ -58,4 +59,3 @@ def logout(request):
     if request.method == "GET":
         do_logout(request)
         return redirect('/')
-

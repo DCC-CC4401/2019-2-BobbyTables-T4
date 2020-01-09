@@ -29,8 +29,6 @@ class test_models(TestCase):
         #                                                          "2019.10.10 10:00", self._persona_natural_1, "posteriori")
 
     def test_gets(self):
-        # self.assertTrue(self._persona_natural_1.user.check_password("contra1"))
-        self.assertEqual("contra1", self._persona_natural_1.get_contrasena())
         self.assertEqual(self._persona_natural_1.get_nombre(), "nom1")
         self.assertEqual(self._persona_natural_2.get_email(), "cor1@gmail.com")
         # self.assertEqual(self._persona_natural_2.user.get_short_name(), "nom2")
