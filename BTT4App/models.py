@@ -42,9 +42,6 @@ class PersonaNatural(models.Model):
         # self.user.get_username()
         return self.user.email
 
-    def get_contrasena(self):
-        return self.user.password
-
 
 class Administrador(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -64,9 +61,6 @@ class Administrador(models.Model):
 
     def get_email(self):
         return self.user.email
-
-    def get_password(self):
-        return self.user.password
 
 
 class IActividad(models.Model):
