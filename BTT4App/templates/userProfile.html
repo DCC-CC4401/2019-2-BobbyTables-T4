@@ -4,9 +4,18 @@
 {% block body %}
     {% if user.is_active %}
         <div class="container-fluid p-4 main">
+
+
             <div class="row">
-                <img src="{{ user.personanatural.fotoDePerfil.url }}" class="circular mx-auto d-block shadow"
-                     height="250px">
+
+                {% if user.personanatural.fotoDePerfil %}
+                    <img src="{{ user.personanatural.fotoDePerfil.url }}" class="circular mx-auto d-block shadow"
+                         height="250px">
+                {% endif %}
+                {% if not user.personanatural.fotoDePerfil %}
+                    <img src="{% static 'img/turing.jpg' %}" class="circular mx-auto d-block shadow" height="250px">
+                {% endif %}
+
             </div>
             <div class="row py-4">
                 <div class="col text-center">
