@@ -53,7 +53,7 @@ def login(request):
                 do_login(request, user)
                 # return render(request, 'landingPage.html')
                 return HttpResponseRedirect(request.GET['next'])
-        u_form = RegisterForm(data=request.POST)
+        u_form = RegisterForm(data=request.POST, files=request.FILES)
         print(u_form.errors)
         if u_form.is_valid():
 
