@@ -1,5 +1,6 @@
 {% extends 'base_generic.html' %}
 {% load staticfiles %}
+{% load crispy_forms_tags %}
 {% block body %}
     {% if user.is_active %}
     <div class="container-fluid p-4 main">
@@ -9,7 +10,19 @@
         <div class="row py-4">
             <div class="col text-center">
                 <p class="h4 text-center text-dark">{{ user.first_name}} {{ user.last_name }}</p>
-                <button type="button" class="btn btn-success">Cambiar imagen</button>
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ profile_form.as_p }}
+
+                    <button type="submit" class="btn btn-outline-info">Cambiar Imagen</button>
+
+                    <!-- fieldset class="form-group">
+
+                    </fieldset >
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-outline-info">Cambiar Imagen</button>
+                    </div-->
+                </form>
             </div>
         </div>
         <!--MENU CON TABS-->

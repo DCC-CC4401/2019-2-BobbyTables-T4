@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'BTT4App',
     'django_extensions',
+    'crispy_forms',
 ]
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

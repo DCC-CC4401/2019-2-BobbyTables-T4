@@ -7,7 +7,8 @@ from django.shortcuts import render, redirect
 from BTT4App.models import *
 
 # Create your views here.
-from BTT4App.forms import LoginForm, RegisterForm
+from BTT4App.forms import LoginForm, RegisterForm, ProfilePictureForm
+
 
 @login_required(login_url='../login/')
 def landingPage(request):
@@ -15,7 +16,21 @@ def landingPage(request):
 
 @login_required(login_url='../login/')
 def profile(request):
-    return render(request, 'userProfile.html')
+
+    if request.method == 'POST':
+        pn = PersonaNatural.objects.filter(user=request.user).first()
+        profile_form = ProfilePictureForm(request.POST, instance=pn)
+        if profile_form.is_valid():
+            profile_form.save()
+            return redirect('landingPage')
+    else:
+        pn = PersonaNatural.objects.filter(user=request.user).first()
+
+        profile_form = ProfilePictureForm(instance=pn)
+
+    return render(request, 'userProfile.html', {
+        'profile_form ' : profile_form
+    })
 
 
 def login(request):
