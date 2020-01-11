@@ -10,7 +10,7 @@ class PersonaNatural(models.Model):
     amigos = models.ManyToManyField('self', blank=True)
     solicitudesPendientes = models.ManyToManyField('self', blank=True)
 
-    def create_persona(self, primerNombre, apellido, email, password):
+    def create_persona(self, primerNombre, apellido, email, password, imagen):
         """
         Creates and saves a User with the given email and password.
         """
@@ -22,10 +22,13 @@ class PersonaNatural(models.Model):
             raise ValueError('Usuarios deben tener un email.')
         if not password:
             raise ValueError('Usuarios deben tener una contraseña.')
+        # if not imagen:
+        #     raise ValueError('Usuarios deben tener una imagen de perfil.')
+
         user = User.objects.create_user(first_name=primerNombre, last_name=apellido, email=email, username=email,
                                         password=password)
         user.save()
-        persona_natural = PersonaNatural(user=user)
+        persona_natural = PersonaNatural(user=user, fotoDePerfil=imagen)
         persona_natural.save()
         return persona_natural
 

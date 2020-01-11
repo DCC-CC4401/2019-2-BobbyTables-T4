@@ -20,7 +20,7 @@ def landingPage(request):
 def profile(request):
 
     if request.method == 'POST':
-        # pn = PersonaNatural.objects.filter(user=request.user).first()
+
         p_form = ProfilePictureForm(request.POST,
                                     request.FILES,
                                     instance=request.user.personanatural
@@ -31,7 +31,6 @@ def profile(request):
             return redirect('profile')
 
     else:
-        # pn = PersonaNatural.objects.filter(user=request.user).first()
 
         p_form = ProfilePictureForm(instance=request.user.personanatural)
 
@@ -69,7 +68,8 @@ def login(request):
                 user.create_persona(regForm.cleaned_data['name'],
                                     regForm.cleaned_data['lastname'],
                                     regForm.cleaned_data['email'],
-                                    regForm.cleaned_data['password'])
+                                    regForm.cleaned_data['password'],
+                                    regForm.cleaned_data['image'])
 
                 user = authenticate(username=regForm.cleaned_data['email'], password=regForm.cleaned_data['password'])
                 if user is not None:
