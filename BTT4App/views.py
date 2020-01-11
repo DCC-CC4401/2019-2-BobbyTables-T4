@@ -1,6 +1,7 @@
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as do_login
 from django.contrib.auth import logout as do_logout
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
@@ -18,22 +19,27 @@ def landingPage(request):
 @login_required(login_url='../login/')
 def profile(request):
 
-
-
     if request.method == 'POST':
-        pn = PersonaNatural.objects.filter(user=request.user).first()
-        p_form = ProfilePictureForm(request.POST, instance=pn)
+        # pn = PersonaNatural.objects.filter(user=request.user).first()
+        p_form = ProfilePictureForm(request.POST,
+                                    request.FILES,
+                                    instance=request.user.personanatural
+                                    )
         if p_form.is_valid():
             p_form.save()
+            messages.success(request, f'Tu cuenta ha sido actualizada')
+            return redirect('profile')
 
     else:
-        pn = PersonaNatural.objects.filter(user=request.user).first()
+        # pn = PersonaNatural.objects.filter(user=request.user).first()
 
-        p_form = ProfilePictureForm(instance=pn)
+        p_form = ProfilePictureForm(instance=request.user.personanatural)
 
-    return render(request, 'userProfile.html', {
-        'p_form' : p_form
-    })
+    context = {
+        'p_form': p_form
+    }
+
+    return render(request, 'userProfile.html', context)
 
 
 def login(request):
