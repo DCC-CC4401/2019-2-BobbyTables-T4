@@ -28,7 +28,8 @@ class PersonaNatural(models.Model):
         user = User.objects.create_user(first_name=primerNombre, last_name=apellido, email=email, username=email,
                                         password=password)
         user.save()
-        persona_natural = PersonaNatural(user=user, fotoDePerfil=imagen)
+        persona_natural = PersonaNatural(user=user)
+        persona_natural.fotoDePerfil = imagen
         persona_natural.save()
         return persona_natural
 
@@ -149,3 +150,6 @@ class Actividad(IActividad):
 
     def get_tiempo(self):
         return self.tiempo
+
+
+

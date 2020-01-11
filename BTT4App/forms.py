@@ -20,3 +20,8 @@ class ProfilePictureForm(forms.ModelForm):
     class Meta:
         model = PersonaNatural
         fields = ['fotoDePerfil']
+
+
+
+
+

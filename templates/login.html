@@ -1,4 +1,5 @@
 {% load staticfiles %}
+{% load crispy_forms_tags %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -22,83 +23,88 @@
         crossorigin="anonymous"></script>
 <script src="{% static 'js/bootstrap.min.js' %}"></script>
 
-    <!--Barra de login-->
-    <div class="container-fluid text-center p-4">
-        <div class="row p-2 mx-2 rounded shadow header-bg ">
-            <div class="col-4 text-left text-white">
-                <h2 class="pt-2">LOGO</h2>
-            </div>
-            <div class="col-8 text-right text-white">
-                <form method="post" >
-                        {% csrf_token %}
-                        <div class="row">
-                            <div class="col-4"></div>
-                            <div class="form-group col-3 ">
-                                <label for="username">Email</label>
-                                <input type="text" class="form-control group-input px-2" id="username" name="username" placeholder="Ingresa tu email">
-                            </div>
-                            <div class="form-group col-3">
-                                <label for="Password">Contraseña</label>
-                                <input type="password" class="form-control group-input px-2" id="password" name="password" placeholder="***********">
-                            </div>
-                            <div class="col-2 align-self-center">
-                                <button type="submit" class="btn btn-primary"> Iniciar sesión</button>
-                            </div>
-                        </div>
+<!--Barra de login-->
+<div class="container-fluid text-center p-4">
+    <div class="row p-2 mx-2 rounded shadow header-bg ">
+        <div class="col-4 text-left text-white">
+            <h2 class="pt-2">LOGO</h2>
+        </div>
+        <div class="col-8 text-right text-white">
+            <form method="post">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-4"></div>
+                    <div class="form-group col-3 ">
+                        <label for="username">Email</label>
+                        <input type="text" class="form-control group-input px-2" id="username" name="username"
+                               placeholder="Ingresa tu email">
+                    </div>
+                    <div class="form-group col-3">
+                        <label for="Password">Contraseña</label>
+                        <input type="password" class="form-control group-input px-2" id="password" name="password"
+                               placeholder="***********">
+                    </div>
+                    <div class="col-2 align-self-center">
+                        <button type="submit" class="btn btn-primary"> Iniciar sesión</button>
+                    </div>
+                </div>
 
-                </form>
-                {% if invalid %}
-                    Nombre de usuario y/o contraseña inválida.
-                {% endif %}
+            </form>
+            {% if invalid %}
+                Nombre de usuario y/o contraseña inválida.
+            {% endif %}
 
-            </div>
         </div>
     </div>
-    <!--Información de la página-->
-    <div class="container-fluid text-left p-4">
+</div>
+<!--Información de la página-->
+<div class="container-fluid text-left p-4">
 
-        <!--Registro de usuario-->
-        <div class="container-fluid text-right col-md-11 ml-3 text-white">
-            <h3 class="text-black-50">¡Regístrate!</h3>
-            <h5 class="text-black-50">En pocos pasos podras medir tu tiempo!</h5>
+    <!--Registro de usuario-->
+    <div class="container-fluid text-right col-md-11 ml-3 text-white">
+        <h3 class="text-black-50">¡Regístrate!</h3>
+        <h5 class="text-black-50">En pocos pasos podras medir tu tiempo!</h5>
+    </div>
+    <div class="row">
+        <div class="col-8">
+            <div class="card">
+                <img src="{% static 'img/turing.png' %}" class="card-img-top" alt="...">
+            </div>
         </div>
-        <div class="row">
-            <div class="col-8">
-                <div class="card">
-                    <img src="{% static 'img/turing.png' %}" class="card-img-top" alt="...">
+
+        <div class="card col-3">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-group text-right">
+                    <input type="text" name="name" placeholder="Nombre" class="form-control"/>
                 </div>
-            </div>
+                <div class="form-group">
+                    <input type="text" name="lastname" placeholder="Apellido" class="form-control"/>
+                </div>
+                <div class="form-group">
+                    <input type="email" name="email" placeholder="Correo electrónico" class="form-control"/>
+                </div>
+                <div class="form-group">
+                    <input type="password" name="password" placeholder="Contraseña" class="form-control"/>
+                </div>
+                <div class="form-group">
+                    <input type="password" name="password2" placeholder="Confirme contraseña" class="form-control"/>
+                </div>
+                <div class="form-group">
+                    <input type="file" name="image" placeholder="Imagen de perfil" class="form-control">
+                </div>
 
-            <div class="card col-3">
-                <form method="post">
-                    {% csrf_token %}
-                    <div class="form-group text-right">
-                        <input type="text" name="name" placeholder="Nombre" class="form-control"/>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" name="lastname" placeholder="Apellido" class="form-control"/>
-                    </div>
-                    <div class="form-group">
-                        <input type="email" name="email" placeholder="Correo electrónico" class="form-control"/>
-                    </div>
-                    <div class="form-group">
-                        <input type="password" name="password" placeholder="Contraseña" class="form-control"/>
-                    </div>
-                    <div class="form-group">
-                        <input type="password" name="password2" placeholder="Confirme contraseña" class="form-control"/>
-                    </div>
-                    <div class="form-group">
-                        <input type="file" name="image" placeholder="Imagen de perfil" class="form-control">
-                    </div>
 
-                    <div class="row">
-                        <div class="col-8"></div>
-                        <div class="col-4">
-                            <button type="submit" class="btn btn-primary m-2 flex-row" >Registrarse</button>
-                        </div>
+
+
+                <div class="row">
+                    <div class="col-8"></div>
+                    <div class="col-4">
+                        <button type="submit" class="btn btn-primary m-2 flex-row">Registrarse</button>
                     </div>
-                </form>
-            </div>
+                </div>
+            </form>
+        </div>
 
     </div>
 
