@@ -3,294 +3,304 @@
 {% load crispy_forms_tags %}
 {% block body %}
     {% if user.is_active %}
-    <div class="container-fluid p-4 main">
-        <div class="row">
-            <img src="{{ user.personanatural.fotoDePerfil.url }}" class="circular mx-auto d-block shadow" height="250px">
-        </div>
-        <div class="row py-4">
-            <div class="col text-center">
-                <p class="h4 text-center text-dark">{{ user.first_name}} {{ user.last_name }}</p>
-                <form method="POST" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    {{ profile_form.as_p }}
+        <div class="container-fluid p-4 main">
+            <div class="row">
+                <img src="{{ user.personanatural.fotoDePerfil.url }}" class="circular mx-auto d-block shadow"
+                     height="250px">
+            </div>
+            <div class="row py-4">
+                <div class="col text-center">
+                    <p class="h4 text-center text-dark">{{ user.first_name }} {{ user.last_name }}</p>
+                    <form method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <fieldset class="form-group">
+                            {{ p_form|crispy }}
+                        </fieldset>
 
-                    <button type="submit" class="btn btn-outline-info">Cambiar Imagen</button>
-
-                    <!-- fieldset class="form-group">
-
-                    </fieldset >
-                    <div class="form-group">
                         <button type="submit" class="btn btn-outline-info">Cambiar Imagen</button>
-                    </div-->
-                </form>
-            </div>
-        </div>
-        <!--MENU CON TABS-->
-        <!--PESTAÑAS-->
-        <div class="row px-5">
-            <div class="col offset-sm-2 col-sm-8">
-                <ul class="nav nav-tabs" id="pestañas-perfil-de-usuario" role="tablist">
-                    <li class="nav-item">
-                        <a class="nav-link nav-link-fix active" id="profile-tab-mi-perfil" data-toggle="tab"
-                           href="#Perfil" role="tab" aria-controls="home" aria-selected="true">Mi Perfil</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link nav-link-fix" id="profile-tab-seguridad" data-toggle="tab" href="#Seguridad"
-                           role="tab" aria-controls="profile" aria-selected="false">Seguridad</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link nav-link-fix" id="contact-tab-amigos" data-toggle="tab" href="#Amigos"
-                           role="tab" aria-controls="contact" aria-selected="false">Amigos</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link nav-link-fix" id="contact-tab-actividades" data-toggle="tab"
-                           href="#Actividades" role="tab" aria-controls="contact" aria-selected="false">Mis
-                            Actividades</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <!--CONTENIDO DE LAS PESTAÑAS-->
-        <div class="row px-5">
-            <div class="tab-content p-4 offset-sm-2 col-sm-8" id="myTabContent">
-                <!--PESTAÑA MI PERFIL-->
-                <div class="tab-pane fade show active" id="Perfil" role="tabpanel" aria-labelledby="Perfil-tab">
-                    <form>
-                        <!--Nombre-->
-                        <fieldset disabled>
-                            <div class="form-group">
-                                <label for="disabledTextInput">Nombre:</label>
-                                <input type="text" id="disabledTextInputNombre" class="form-control"
-                                       placeholder=" {{ user.first_name }}">
-                            </div>
-                        </fieldset>
-                        <!--Apellidos-->
-                        <fieldset disabled>
-                            <div class="form-group">
-                                <label for="disabledTextInput">Apellidos:</label>
-                                <input type="text" id="disabledTextInputApellidos" class="form-control"
-                                       placeholder="{{ user.last_name }}">
-                            </div>
-                        </fieldset>
-                        <!--Correo Electronico -->
-                        <fieldset disabled>
-                            <div class="form-group">
-                                <label for="disabledTextInput">Correo electronico:</label>
-                                <input type="text" id="disabledTextInput" class="form-control"
-                                       placeholder="{{ user.email}}">
-                            </div>
-                        </fieldset>
-                        <!--Fecha de nacimiento -->
-                        <!-- <fieldset disabled>
-                            <div class="form-group">
-                                <label for="disabledTextInput">Fecha de Nacimiento:</label>
-                                <input type="text" id="disabledTextInputFechaNacimiento" class="form-control"
-                                       placeholder="dd/mm/yyyy">
-                            </div>
-                        </fieldset> -->
+
+                        <!-- fieldset class="form-group">
+
+                        </fieldset >
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-outline-info">Cambiar Imagen</button>
+                        </div-->
                     </form>
                 </div>
-                <!--PESTAÑA SEGURIDAD-->
-                <div class="tab-pane fade show disabled" id="Seguridad" role="tabpanel" aria-labelledby="Seguridad-tab">
-                 <!--   <form>
-                        < !--Contraseña actual-- >
-                        <fieldset disabled>
-                            <div class="form-group">
-                                <label for="disabledTextInput">Contraseña actual:</label>
-                                <input type="text" id="disabledTextInputContraseñaActual" class="form-control"
-                                       placeholder="************">
+            </div>
+            <!--MENU CON TABS-->
+            <!--PESTAÑAS-->
+            <div class="row px-5">
+                <div class="col offset-sm-2 col-sm-8">
+                    <ul class="nav nav-tabs" id="pestañas-perfil-de-usuario" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link nav-link-fix active" id="profile-tab-mi-perfil" data-toggle="tab"
+                               href="#Perfil" role="tab" aria-controls="home" aria-selected="true">Mi Perfil</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link nav-link-fix" id="profile-tab-seguridad" data-toggle="tab"
+                               href="#Seguridad"
+                               role="tab" aria-controls="profile" aria-selected="false">Seguridad</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link nav-link-fix" id="contact-tab-amigos" data-toggle="tab" href="#Amigos"
+                               role="tab" aria-controls="contact" aria-selected="false">Amigos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link nav-link-fix" id="contact-tab-actividades" data-toggle="tab"
+                               href="#Actividades" role="tab" aria-controls="contact" aria-selected="false">Mis
+                                Actividades</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!--CONTENIDO DE LAS PESTAÑAS-->
+            <div class="row px-5">
+                <div class="tab-content p-4 offset-sm-2 col-sm-8" id="myTabContent">
+                    <!--PESTAÑA MI PERFIL-->
+                    <div class="tab-pane fade show active" id="Perfil" role="tabpanel" aria-labelledby="Perfil-tab">
+                        <form>
+                            <!--Nombre-->
+                            <fieldset disabled>
+                                <div class="form-group">
+                                    <label for="disabledTextInput">Nombre:</label>
+                                    <input type="text" id="disabledTextInputNombre" class="form-control"
+                                           placeholder=" {{ user.first_name }}">
+                                </div>
+                            </fieldset>
+                            <!--Apellidos-->
+                            <fieldset disabled>
+                                <div class="form-group">
+                                    <label for="disabledTextInput">Apellidos:</label>
+                                    <input type="text" id="disabledTextInputApellidos" class="form-control"
+                                           placeholder="{{ user.last_name }}">
+                                </div>
+                            </fieldset>
+                            <!--Correo Electronico -->
+                            <fieldset disabled>
+                                <div class="form-group">
+                                    <label for="disabledTextInput">Correo electronico:</label>
+                                    <input type="text" id="disabledTextInput" class="form-control"
+                                           placeholder="{{ user.email }}">
+                                </div>
+                            </fieldset>
+                            <!--Fecha de nacimiento -->
+                            <!-- <fieldset disabled>
+                                <div class="form-group">
+                                    <label for="disabledTextInput">Fecha de Nacimiento:</label>
+                                    <input type="text" id="disabledTextInputFechaNacimiento" class="form-control"
+                                           placeholder="dd/mm/yyyy">
+                                </div>
+                            </fieldset> -->
+                        </form>
+                    </div>
+                    <!--PESTAÑA SEGURIDAD-->
+                    <div class="tab-pane fade show disabled" id="Seguridad" role="tabpanel"
+                         aria-labelledby="Seguridad-tab">
+                        <!--   <form>
+                               < !--Contraseña actual-- >
+                               <fieldset disabled>
+                                   <div class="form-group">
+                                       <label for="disabledTextInput">Contraseña actual:</label>
+                                       <input type="text" id="disabledTextInputContraseñaActual" class="form-control"
+                                              placeholder="************">
+                                   </div>
+                               </fieldset>
+                               <! --Contraseña nueva-- >
+                               <div class="form-group">
+                                   <label for="exampleInputEmail1">Nueva Contraseña</label>
+                                   <input type="email" class="form-control" id="exampleInputEmail1"
+                                          aria-describedby="emailHelp" placeholder="Nueva Contraseña">
+                               </div>
+                               < !--Contraseña confirmacion-- >
+                               <div class="form-group">
+                                   <label for="exampleInputEmail1">Confirmación Contraseña</label>
+                                   <input type="email" class="form-control" id="Pass-conf" aria-describedby="emailHelp"
+                                          placeholder="Confirmación Contraseña">
+                               </div>
+                           </form> -->
+                        <form action="/accounts/password_change">
+                            <input type="submit" class="btn btn-success" value="Cambiar Contraseña">
+                        </form>
+                    </div>
+                    <!--PESTAÑA AMIGOS-->
+                    <div class="tab-pane fade" id="Amigos" role="tabpanel" aria-labelledby="Amigos-tab">
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" placeholder="Buscar amigos"
+                                   aria-label="Recipient's username" aria-describedby="button-addon2">
+                            <div class="input-group-append">
+                                <button class="btn btn-secondary" type="button" id="button-addon2">Buscar</button>
                             </div>
-                        </fieldset>
-                        <! --Contraseña nueva-- >
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">Nueva Contraseña</label>
-                            <input type="email" class="form-control" id="exampleInputEmail1"
-                                   aria-describedby="emailHelp" placeholder="Nueva Contraseña">
                         </div>
-                        < !--Contraseña confirmacion-- >
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">Confirmación Contraseña</label>
-                            <input type="email" class="form-control" id="Pass-conf" aria-describedby="emailHelp"
-                                   placeholder="Confirmación Contraseña">
+                        <!-- Descomentar este pedazo de codigo para ver interfaz resultados busqueda-->
+                        <!-- Enviar solicitud de Amistad
+                        <div class="card spaced" style="width: 100%;">
+                            <div class="card-header">
+                                Resultados búsqueda
+                                <button class="btn btn-sm btn-success float-right" type="button" data-toggle="collapse"
+                                        data-target="#friends-list" aria-expanded="false" aria-controls="friends-list"
+                                        id="friends-toggle" onclick="toggleName(this.id)">Ver más
+                                </button>
+                            </div>
+                            <ul class="list-group list-group-flush collapse" id="friends-list">
+                                <li class="list-group-item">
+                                    <a href="404" class="fr-link">
+                                        Chris Evans</a>
+                                    <button type="button" class="btn btn-sm btn-outline-success float-right">Agregar a
+                                        amigos
+                                    </button>
+                                </li>
+                                <li class="list-group-item">
+                                    <a href="404" class="fr-link">
+                                        Chris Hemsworth</a>
+                                    <button type="button" class="btn btn-sm btn-outline-success float-right">Agregar a
+                                        amigos
+                                    </button>
+                                </li>
+                                <li class="list-group-item">
+                                    <a href="404" class="fr-link">
+                                        Chris Pratt</a>
+                                    <button type="button" class="btn btn-sm btn-outline-success float-right">Agregar a
+                                        amigos
+                                    </button>
+                                </li>
+                                <li class="list-group-item">
+                                    <a href="404" class="fr-link">
+                                        Chris Pyne</a>
+                                    <button type="button" class="btn btn-sm btn-outline-success float-right">Agregar a
+                                        amigos
+                                    </button>
+                                </li>
+                            </ul>
                         </div>
-                    </form> -->
-                    <form action="/accounts/password_change">
-                        <input type="submit"  class="btn btn-success" value ="Cambiar Contraseña">
-                    </form>
-                </div>
-                <!--PESTAÑA AMIGOS-->
-                <div class="tab-pane fade" id="Amigos" role="tabpanel" aria-labelledby="Amigos-tab">
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Buscar amigos"
-                               aria-label="Recipient's username" aria-describedby="button-addon2">
-                        <div class="input-group-append">
-                            <button class="btn btn-secondary" type="button" id="button-addon2">Buscar</button>
+                    </div> -->
+                        <!-- Solicitudes de amistad -->
+                        <div class="card spaced" style="width: 100%;">
+                            <div class="card-header">
+                                Solicitudes
+                                <button class="btn btn-sm btn-success float-right" type="button" data-toggle="collapse"
+                                        data-target="#friends-request-list" aria-expanded="false"
+                                        aria-controls="friends-list"
+                                        id="friends-request-toggle" onclick="toggleName(this.id)">Ver más
+                                </button>
+                            </div>
+                            <ul class="list-group list-group-flush collapse" id="friends-request-list">
+                                <li class="list-group-item">
+                                    <a href="404" class="fr-link">
+                                        Keanu Reeves</a>
+                                    <button type="button" class="btn btn-sm btn-outline-success float-right">Aceptar
+                                    </button>
+                                    <p class="float-right" style="margin-left: 10px"></p>
+                                    <button type="button" class="btn btn-sm btn-outline-danger float-right">Rechazar
+                                    </button>
+                                </li>
+                                <li class="list-group-item">
+                                    <a href="404" class="fr-link">
+                                        Bobby Tables</a>
+                                    <button type="button" class="btn btn-sm btn-outline-success float-right">Aceptar
+                                    </button>
+                                    <p class="float-right" style="margin-left: 10px"></p>
+                                    <button type="button" class="btn btn-sm btn-outline-danger float-right">Rechazar
+                                    </button>
+                                </li>
+                                <li class="list-group-item">
+                                    <a href="404" class="fr-link">
+                                        Grace Hopper</a>
+                                    <button type="button" class="btn btn-sm btn-outline-success float-right">Aceptar
+                                    </button>
+                                    <p class="float-right" style="margin-left: 10px"></p>
+                                    <button type="button" class="btn btn-sm btn-outline-danger float-right">Rechazar
+                                    </button>
+                                </li>
+                                <li class="list-group-item">
+                                    <a href="404" class="fr-link">Ada Lovelace</a>
+                                    <button type="button" class="btn btn-sm btn-outline-success float-right">Aceptar
+                                    </button>
+                                    <p class="float-right" style="margin-left: 10px"></p>
+                                    <button type="button" class="btn btn-sm btn-outline-danger float-right">Rechazar
+                                    </button>
+                                </li>
+                            </ul>
                         </div>
-                    </div>
-                    <!-- Descomentar este pedazo de codigo para ver interfaz resultados busqueda-->
-                    <!-- Enviar solicitud de Amistad
-                    <div class="card spaced" style="width: 100%;">
-                        <div class="card-header">
-                            Resultados búsqueda
-                            <button class="btn btn-sm btn-success float-right" type="button" data-toggle="collapse"
-                                    data-target="#friends-list" aria-expanded="false" aria-controls="friends-list"
-                                    id="friends-toggle" onclick="toggleName(this.id)">Ver más
-                            </button>
-                        </div>
-                        <ul class="list-group list-group-flush collapse" id="friends-list">
-                            <li class="list-group-item">
-                                <a href="404" class="fr-link">
-                                    Chris Evans</a>
-                                <button type="button" class="btn btn-sm btn-outline-success float-right">Agregar a
-                                    amigos
+                        <!-- Amigos aceptados -->
+                        <div class="card spaced" style="width: 100%;">
+                            <div class="card-header">
+                                Amigos
+                                <button class="btn btn-sm btn-success float-right" type="button" data-toggle="collapse"
+                                        data-target="#friends-list" aria-expanded="false" aria-controls="friends-list"
+                                        id="friends-toggle" onclick="toggleName(this.id)">Ver más
                                 </button>
-                            </li>
-                            <li class="list-group-item">
-                                <a href="404" class="fr-link">
-                                    Chris Hemsworth</a>
-                                <button type="button" class="btn btn-sm btn-outline-success float-right">Agregar a
-                                    amigos
-                                </button>
-                            </li>
-                            <li class="list-group-item">
-                                <a href="404" class="fr-link">
-                                    Chris Pratt</a>
-                                <button type="button" class="btn btn-sm btn-outline-success float-right">Agregar a
-                                    amigos
-                                </button>
-                            </li>
-                            <li class="list-group-item">
-                                <a href="404" class="fr-link">
-                                    Chris Pyne</a>
-                                <button type="button" class="btn btn-sm btn-outline-success float-right">Agregar a
-                                    amigos
-                                </button>
-                            </li>
-                        </ul>
-                    </div>
-                </div> -->
-                    <!-- Solicitudes de amistad -->
-                    <div class="card spaced" style="width: 100%;">
-                        <div class="card-header">
-                            Solicitudes
-                            <button class="btn btn-sm btn-success float-right" type="button" data-toggle="collapse"
-                                    data-target="#friends-request-list" aria-expanded="false"
-                                    aria-controls="friends-list"
-                                    id="friends-request-toggle" onclick="toggleName(this.id)">Ver más
-                            </button>
-                        </div>
-                        <ul class="list-group list-group-flush collapse" id="friends-request-list">
-                            <li class="list-group-item">
-                                <a href="404" class="fr-link">
-                                    Keanu Reeves</a>
-                                <button type="button" class="btn btn-sm btn-outline-success float-right">Aceptar
-                                </button>
-                                <p class="float-right" style="margin-left: 10px"></p>
-                                <button type="button" class="btn btn-sm btn-outline-danger float-right">Rechazar
-                                </button>
-                            </li>
-                            <li class="list-group-item">
-                                <a href="404" class="fr-link">
-                                    Bobby Tables</a>
-                                <button type="button" class="btn btn-sm btn-outline-success float-right">Aceptar
-                                </button>
-                                <p class="float-right" style="margin-left: 10px"></p>
-                                <button type="button" class="btn btn-sm btn-outline-danger float-right">Rechazar
-                                </button>
-                            </li>
-                            <li class="list-group-item">
-                                <a href="404" class="fr-link">
-                                    Grace Hopper</a>
-                                <button type="button" class="btn btn-sm btn-outline-success float-right">Aceptar
-                                </button>
-                                <p class="float-right" style="margin-left: 10px"></p>
-                                <button type="button" class="btn btn-sm btn-outline-danger float-right">Rechazar
-                                </button>
-                            </li>
-                            <li class="list-group-item">
-                                <a href="404" class="fr-link">Ada Lovelace</a>
-                                <button type="button" class="btn btn-sm btn-outline-success float-right">Aceptar
-                                </button>
-                                <p class="float-right" style="margin-left: 10px"></p>
-                                <button type="button" class="btn btn-sm btn-outline-danger float-right">Rechazar
-                                </button>
-                            </li>
-                        </ul>
-                    </div>
-                    <!-- Amigos aceptados -->
-                    <div class="card spaced" style="width: 100%;">
-                        <div class="card-header">
-                            Amigos
-                            <button class="btn btn-sm btn-success float-right" type="button" data-toggle="collapse"
-                                    data-target="#friends-list" aria-expanded="false" aria-controls="friends-list"
-                                    id="friends-toggle" onclick="toggleName(this.id)">Ver más
-                            </button>
-                        </div>
-                        <ul class="list-group list-group-flush collapse" id="friends-list">
-                            <li class="list-group-item">
-                                <a href="404" class="fr-link">
-                                    Christopher Machine</a>
-                                <button type="button" class="btn btn-sm btn-outline-danger float-right">Eliminar
-                                </button>
-                            </li>
-                            <li class="list-group-item">
-                                <a href="404" class="fr-link">
-                                    Alonzo Church</a>
-                                <button type="button" class="btn btn-sm btn-outline-danger float-right">Eliminar
-                                </button>
-                            </li>
-                            <li class="list-group-item">
-                                <a href="404" class="fr-link">
-                                    Allan Hotdog</a>
-                                <button type="button" class="btn btn-sm btn-outline-danger float-right">Eliminar
-                                </button>
-                            </li>
-                            <li class="list-group-item">
-                                <a href="404" class="fr-link">
-                                    Joan Clarke</a>
-                                <button type="button" class="btn btn-sm btn-outline-danger float-right">Eliminar
-                                </button>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <!-- PESTAÑA ACTIVIDADES -->
-                <div class="tab-pane fade" id="Actividades" role="tabpanel" aria-labelledby="Actividades-tab">
-                    <button type="button" class="btn btn-primary btn-lg btn-block"> Crear una nueva actividad</button>
-                    <div class="card spaced">
-                        <div class="card-body sleep-activity text-white">
-                            <img src="{% static 'img/bed.png' %}" class="activity-icon invert-color mx-2"> Dormir
-                            <button type="button" class="btn btn-sm btn-primary float-right"> Ver info</button>
+                            </div>
+                            <ul class="list-group list-group-flush collapse" id="friends-list">
+                                <li class="list-group-item">
+                                    <a href="404" class="fr-link">
+                                        Christopher Machine</a>
+                                    <button type="button" class="btn btn-sm btn-outline-danger float-right">Eliminar
+                                    </button>
+                                </li>
+                                <li class="list-group-item">
+                                    <a href="404" class="fr-link">
+                                        Alonzo Church</a>
+                                    <button type="button" class="btn btn-sm btn-outline-danger float-right">Eliminar
+                                    </button>
+                                </li>
+                                <li class="list-group-item">
+                                    <a href="404" class="fr-link">
+                                        Allan Hotdog</a>
+                                    <button type="button" class="btn btn-sm btn-outline-danger float-right">Eliminar
+                                    </button>
+                                </li>
+                                <li class="list-group-item">
+                                    <a href="404" class="fr-link">
+                                        Joan Clarke</a>
+                                    <button type="button" class="btn btn-sm btn-outline-danger float-right">Eliminar
+                                    </button>
+                                </li>
+                            </ul>
                         </div>
                     </div>
-                    <div class="card spaced">
-                        <div class="card-body study-activity text-white">
-                            <img src="{% static 'img/open-book.png' %}" class="activity-icon invert-color mx-2"> Estudiar
-                            <button type="button" class="btn btn-sm btn-primary float-right"> Ver info</button>
+                    <!-- PESTAÑA ACTIVIDADES -->
+                    <div class="tab-pane fade" id="Actividades" role="tabpanel" aria-labelledby="Actividades-tab">
+                        <button type="button" class="btn btn-primary btn-lg btn-block"> Crear una nueva actividad
+                        </button>
+                        <div class="card spaced">
+                            <div class="card-body sleep-activity text-white">
+                                <img src="{% static 'img/bed.png' %}" class="activity-icon invert-color mx-2"> Dormir
+                                <button type="button" class="btn btn-sm btn-primary float-right"> Ver info</button>
+                            </div>
                         </div>
-                    </div>
-                    <div class="card spaced">
-                        <div class="card-body eat-activity text-white">
-                            <img src="{% static 'img/crossed-knife-and-fork.png' %}" class="activity-icon invert-color mx-2"> Almorzar
-                            <button type="button" class="btn btn-sm btn-primary float-right"> Ver info</button>
+                        <div class="card spaced">
+                            <div class="card-body study-activity text-white">
+                                <img src="{% static 'img/open-book.png' %}" class="activity-icon invert-color mx-2">
+                                Estudiar
+                                <button type="button" class="btn btn-sm btn-primary float-right"> Ver info</button>
+                            </div>
                         </div>
-                    </div>
-                    <div class="card spaced">
-                        <div class="card-body house-activity text-white">
-                            <img src="{% static 'img/washing-machine.png' %}" class="activity-icon invert-color mx-2"> Lavar ropa
-                            <button type="button" class="btn btn-sm btn-primary float-right"> Ver info</button>
+                        <div class="card spaced">
+                            <div class="card-body eat-activity text-white">
+                                <img src="{% static 'img/crossed-knife-and-fork.png' %}"
+                                     class="activity-icon invert-color mx-2"> Almorzar
+                                <button type="button" class="btn btn-sm btn-primary float-right"> Ver info</button>
+                            </div>
                         </div>
-                    </div>
-                    <div class="card spaced">
-                        <div class="card-body animal-activity text-white">
-                            <img src="{% static 'img/snowshoe-cat.png' %}" class="activity-icon invert-color mx-2"> Jugar con el Michi
-                            <button type="button" class="btn btn-sm btn-primary float-right"> Ver info</button>
+                        <div class="card spaced">
+                            <div class="card-body house-activity text-white">
+                                <img src="{% static 'img/washing-machine.png' %}"
+                                     class="activity-icon invert-color mx-2"> Lavar ropa
+                                <button type="button" class="btn btn-sm btn-primary float-right"> Ver info</button>
+                            </div>
+                        </div>
+                        <div class="card spaced">
+                            <div class="card-body animal-activity text-white">
+                                <img src="{% static 'img/snowshoe-cat.png' %}" class="activity-icon invert-color mx-2">
+                                Jugar con el Michi
+                                <button type="button" class="btn btn-sm btn-primary float-right"> Ver info</button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
     {% endif %}
     <!-- BOOTSTRAP JS, DO NOT DELETE -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
