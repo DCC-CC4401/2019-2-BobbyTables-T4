@@ -22,6 +22,11 @@ class ProfilePictureForm(forms.ModelForm):
         fields = ['fotoDePerfil']
 
 
+class ChangePassForm(forms.Form):
+    oldpassword = forms.CharField(widget=forms.PasswordInput())
+    newpassword = forms.CharField(widget=forms.PasswordInput())
+    newpassword2 = forms.CharField(widget=forms.PasswordInput())
+
 
 
 

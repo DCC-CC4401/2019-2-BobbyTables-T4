@@ -1,4 +1,4 @@
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate, update_session_auth_hash
 from django.contrib.auth import login as do_login
 from django.contrib.auth import logout as do_logout
 from django.contrib import messages
@@ -8,7 +8,7 @@ from django.shortcuts import render, redirect
 from BTT4App.models import *
 
 # Create your views here.
-from BTT4App.forms import LoginForm, RegisterForm, ProfilePictureForm
+from BTT4App.forms import LoginForm, RegisterForm, ProfilePictureForm, ChangePassForm
 
 
 @login_required(login_url='../login/')
@@ -19,6 +19,21 @@ def landingPage(request):
 @login_required(login_url='../login/')
 def profile(request):
     if request.method == 'POST':
+
+        pass_form = ChangePassForm(data=request.POST)
+        if pass_form.is_valid():
+            oldpassword = pass_form.cleaned_data['oldpassword']
+            newpassword = pass_form.cleaned_data['newpassword']
+            newpassword2 = pass_form.cleaned_data['newpassword2']
+            user = request.user
+            if user.check_password(oldpassword) and newpassword == newpassword2:
+                user.set_password(newpassword)
+                user.save()
+                messages.success(request, f'Tu contraseña ha sido actualizada')
+                log_user = authenticate(username=user.username, password=newpassword)
+                if log_user is not None:
+                    do_login(request, log_user)
+                return redirect('profile')
 
         p_form = ProfilePictureForm(request.POST,
                                     request.FILES,

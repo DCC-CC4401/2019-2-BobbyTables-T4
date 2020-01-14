@@ -100,31 +100,28 @@
                     <!--PESTAÑA SEGURIDAD-->
                     <div class="tab-pane fade show disabled" id="Seguridad" role="tabpanel"
                          aria-labelledby="Seguridad-tab">
-                        <!--   <form>
-                               < !--Contraseña actual-- >
-                               <fieldset disabled>
-                                   <div class="form-group">
-                                       <label for="disabledTextInput">Contraseña actual:</label>
-                                       <input type="text" id="disabledTextInputContraseñaActual" class="form-control"
-                                              placeholder="************">
+                        <form method="post">
+                               <!--Contraseña actual -->
+                            {% csrf_token %}
+                                <div class="form-group">
+                                    <label for="disabledTextInput">Contraseña actual:</label>
+                                    <input type="password" class="form-control" name="oldpassword" placeholder="************">
                                    </div>
-                               </fieldset>
-                               <! --Contraseña nueva-- >
-                               <div class="form-group">
-                                   <label for="exampleInputEmail1">Nueva Contraseña</label>
-                                   <input type="email" class="form-control" id="exampleInputEmail1"
-                                          aria-describedby="emailHelp" placeholder="Nueva Contraseña">
+                                <!--Contraseña nueva-->
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Nueva Contraseña</label>
+                                    <input type="password" class="form-control" name="newpassword" placeholder="Nueva Contraseña">
                                </div>
-                               < !--Contraseña confirmacion-- >
+                               <!--Contraseña confirmacion-->
                                <div class="form-group">
                                    <label for="exampleInputEmail1">Confirmación Contraseña</label>
-                                   <input type="email" class="form-control" id="Pass-conf" aria-describedby="emailHelp"
-                                          placeholder="Confirmación Contraseña">
+                                   <input type="password" class="form-control" name="newpassword2" placeholder="Confirmación Contraseña">
                                </div>
-                           </form> -->
-                        <form action="/accounts/password_change">
+                                <button type="submit" class="btn btn-outline-danger m-2 flex-row">Cambiar contraseña</button>
+                           </form>
+                        <!-- <form action="/accounts/password_change">
                             <input type="submit" class="btn btn-success" value="Cambiar Contraseña">
-                        </form>
+                        </form> -->
                     </div>
                     <!--PESTAÑA AMIGOS-->
                     <div class="tab-pane fade" id="Amigos" role="tabpanel" aria-labelledby="Amigos-tab">

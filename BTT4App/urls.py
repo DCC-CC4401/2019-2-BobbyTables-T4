@@ -9,5 +9,5 @@ urlpatterns = [
                   path('profile/', profile, name='profile'),
                   path('login/', login, name='login'),
                   path('logout/', logout, name='logout'),
-                  path('accounts/', include('django.contrib.auth.urls')),
+                  #path('accounts/', include('django.contrib.auth.urls')),
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
