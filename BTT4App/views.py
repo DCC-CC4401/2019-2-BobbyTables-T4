@@ -41,7 +41,6 @@ def profile(request):
                                     )
         if p_form.is_valid():
             p_form.save()
-            messages.success(request, f'Tu cuenta ha sido actualizada')
             return redirect('profile')
 
     else:

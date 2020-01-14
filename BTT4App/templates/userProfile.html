@@ -87,6 +87,18 @@
                                            placeholder="{{ user.email }}">
                                 </div>
                             </fieldset>
+                            {% if messages %}
+                                <ul class="messages">
+                                {% for message in messages %}
+                                    <li>
+                                    <div class="alert alert-success alert-dismissable" role="alert">
+                                        <a class="panel-close close" data-dismiss="alert">×</a>
+                                    {{ message }}
+                                    </div>
+                                    </li>
+                                {% endfor %}
+                                </ul>
+                            {% endif %}
                             <!--Fecha de nacimiento -->
                             <!-- <fieldset disabled>
                                 <div class="form-group">
@@ -118,6 +130,7 @@
                                    <input type="password" class="form-control" name="newpassword2" placeholder="Confirmación Contraseña">
                                </div>
                                 <button type="submit" class="btn btn-outline-danger m-2 flex-row">Cambiar contraseña</button>
+
                            </form>
                         <!-- <form action="/accounts/password_change">
                             <input type="submit" class="btn btn-success" value="Cambiar Contraseña">
