@@ -27,7 +27,7 @@
 <div class="container-fluid text-center p-4">
     <div class="row p-2 mx-2 rounded shadow header-bg ">
         <div class="col-4 text-left text-white">
-            <h2 class="pt-2">LOGO</h2>
+            <h1 class="pt-2">Bobby Tables!</h1>
         </div>
         <div class="col-8 text-right text-white">
             <form method="post">
@@ -61,18 +61,43 @@
 <div class="container-fluid text-left p-4">
 
     <!--Registro de usuario-->
-    <div class="container-fluid text-right col-md-11 ml-3 text-white">
-        <h3 class="text-black-50">¡Regístrate!</h3>
-        <h5 class="text-black-50">En pocos pasos podras medir tu tiempo!</h5>
+    <div class="container-fluid text-right col-11 mx-3 text-white">
+        <h1 class="text-black-50">¡Regístrate!</h1>
+        <h3 class="text-black-50">En pocos pasos podras medir tu tiempo!</h3>
     </div>
-    <div class="row">
-        <div class="col-8 bg-dark">
-            <div class="card">
-                <img src="{% static 'img/turing.png' %}" class="card-img-top" alt="...">
+    <div class="row text-white">
+        <div class="col-8 border border-dark bg-dark rounded mx-4">
+            <div class="row justify-content-center">
+                <h1 class="py-3"> Bobby Tables </h1>
+            </div>
+            <div class="row justify-content-center">
+                <h3> La App que buscas para organizar tu día a día</h3>
+            </div>
+            <div class="row justify-content-center py-3">
+                <div class="col-sm text-center">
+                    <h5> Comparte con tus amigos tus actividades diarias! </h5>
+                </div>
+                <div class="col-sm text-center">
+                    <h5> Planifica tus actividades para obtener mejores resultados </h5>
+                </div>
+                <div class="col-sm text-center">
+                    <h5> Compara y fija objetivos </h5>
+                </div>
+            </div>
+            <div class="row justify-content-center py-3">
+                <div class="col-sm text-center">
+                    <img src="{% static 'img/friend.png' %}" class="avatar-icon px-2 py-2">
+                </div>
+                <div class="col-sm text-center">
+                    <img src="{% static 'img/calendar.png' %}" class="avatar-icon px-2 py-2">
+                </div>
+                <div class="col-sm text-center">
+                    <img src="{% static 'img/target.png' %}" class="avatar-icon px-2 py-2">
+                </div>
             </div>
         </div>
 
-        <div class="card col-3">
+        <div class="card col-3 border border-primary rounded">
             <form method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 <div class="form-group text-right">
@@ -94,14 +119,8 @@
                     <input type="file" name="image" placeholder="Imagen de perfil" class="form-control">
                 </div>
 
-
-
-
-                <div class="row">
-                    <div class="col-8"></div>
-                    <div class="col-4">
-                        <button type="submit" class="btn btn-primary m-2 flex-row">Registrarse</button>
-                    </div>
+                <div class="row d-flex flex-row-reverse">
+                    <button type="submit" class="btn btn-success m-2 flex-row">Registrarse</button>
                 </div>
             </form>
         </div>
